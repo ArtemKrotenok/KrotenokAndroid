@@ -18,6 +18,10 @@ public class TextExchangeActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_text_exchange);
+        initClickListener();
+    }
+
+    private void initClickListener() {
         button = (Button) findViewById(R.id.button1);
         textView1 = (TextView) findViewById(R.id.textView1);
         textView2 = (TextView) findViewById(R.id.textView2);
