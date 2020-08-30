@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">AndroidBeginner</string>
+    <string name="text_number_1">Text number 1</string>
+    <string name="text_number_2">Text number 2</string>
+    <string name="button">Button</string>
+</resources>
