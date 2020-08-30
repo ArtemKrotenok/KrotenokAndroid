@@ -6,4 +6,5 @@
     <color name="color_background_textView1">#6D8CDA</color>
     <color name="color_background_textView2">#94EF63</color>
     <color name="text_color_button">#FFFFFF</color>
+    <color name="background_color_menu_button">#6AADDF</color>
 </resources>

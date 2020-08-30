@@ -3,4 +3,7 @@
     <string name="text_number_1">Text number 1</string>
     <string name="text_number_2">Text number 2</string>
     <string name="button">Button</string>
+    <string name="text_exchange_activity">TextExchangeActivity</string>
+    <string name="flags_activity">FlagsActivity</string>
+    <string name="future_menu_name">.....</string>
 </resources>
