@@ -16,31 +16,34 @@ public class MainMenuActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        initListenerButtonSelectTextExchangeActivity();
-        initListenerButtonSelectFlagsActivity();
+        initListenerButtonSelectActivity();
     }
 
-    private void initListenerButtonSelectTextExchangeActivity() {
+    private void initListenerButtonSelectActivity() {
         buttonSelectTextExchangeActivity = (Button) findViewById(R.id.button_menu_text_exchange_activity);
-        View.OnClickListener onClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainMenuActivity.this, TextExchangeActivity.class);
-                startActivity(intent);
-            }
-        };
-        buttonSelectTextExchangeActivity.setOnClickListener(onClickListener);
-    }
-
-    private void initListenerButtonSelectFlagsActivity() {
         buttonSelectFlagsActivity = (Button) findViewById(R.id.button_menu_flags_activity);
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainMenuActivity.this, FlagsActivity.class);
-                startActivity(intent);
+                Intent intent;
+                switch (v.getId()) {
+                    case R.id.button_menu_text_exchange_activity: {
+                        intent = new Intent(MainMenuActivity.this, TextExchangeActivity.class);
+                        break;
+                    }
+                    case R.id.button_menu_flags_activity: {
+                        intent = new Intent(MainMenuActivity.this, FlagsActivity.class);
+                        break;
+                    }
+                    default:
+                        intent = null;
+                }
+                if (intent != null) {
+                    startActivity(intent);
+                }
             }
         };
+        buttonSelectTextExchangeActivity.setOnClickListener(onClickListener);
         buttonSelectFlagsActivity.setOnClickListener(onClickListener);
     }
 }
