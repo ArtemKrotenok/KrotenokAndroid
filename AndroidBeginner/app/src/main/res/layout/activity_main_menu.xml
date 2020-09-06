@@ -39,7 +39,7 @@
             android:textSize="24sp" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/button_menu_login_activity"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/margin_value"
@@ -48,7 +48,7 @@
             android:layout_marginBottom="@dimen/margin_value_half"
             android:layout_weight="1"
             android:background="@color/background_color_menu_button"
-            android:text="@string/future_menu_name"
+            android:text="LoginLinearActivity"
             android:textAllCaps="false"
             android:textSize="24sp" />
 
