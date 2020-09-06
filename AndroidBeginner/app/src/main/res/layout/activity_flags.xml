@@ -11,26 +11,22 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="300dp"
+            android:background="@color/color_flag_red"
+            android:orientation="vertical"
+            android:weightSum="3">
 
-            <TextView
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/color_flag_red" />
 
-            <TextView
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/color_flag_white" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:background="@color/color_flag_red" />
         </LinearLayout>
 
         <LinearLayout
@@ -39,13 +35,13 @@
             android:layout_marginTop="@dimen/margin_flag"
             android:orientation="vertical">
 
-            <TextView
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_weight="1"
                 android:background="@color/color_flag_white" />
 
-            <TextView
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_weight="1"
@@ -58,19 +54,19 @@
             android:layout_marginTop="@dimen/margin_flag"
             android:orientation="horizontal">
 
-            <TextView
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_weight="1"
                 android:background="@color/color_flag_green" />
 
-            <TextView
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_weight="1"
                 android:background="@color/color_flag_white" />
 
-            <TextView
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_weight="1"
@@ -83,19 +79,19 @@
             android:layout_marginTop="@dimen/margin_flag"
             android:orientation="vertical">
 
-            <TextView
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_weight="1"
                 android:background="@color/color_flag_yellow" />
 
-            <TextView
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="75dp"
                 android:layout_weight="1"
                 android:background="#2D2F31" />
 
-            <TextView
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="75dp"
                 android:layout_weight="1"
@@ -108,7 +104,7 @@
             android:layout_marginTop="@dimen/margin_flag"
             android:orientation="horizontal">
 
-            <TextView
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_weight="2"
@@ -120,13 +116,13 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <TextView
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:layout_weight="1"
                     android:background="@color/color_flag_red" />
 
-                <TextView
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:layout_weight="1"
@@ -140,31 +136,31 @@
             android:layout_marginTop="@dimen/margin_flag"
             android:orientation="vertical">
 
-            <TextView
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:background="@color/color_flag_red" />
 
-            <TextView
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:background="@color/color_flag_white" />
 
-            <TextView
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_weight="1"
                 android:background="@color/color_flag_blue" />
 
-            <TextView
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:background="@color/color_flag_white" />
 
-            <TextView
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_weight="1"
@@ -182,26 +178,26 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_weight="3"
                     android:background="@color/color_flag_red" />
 
-                <TextView
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_weight="4"
                     android:background="@color/color_flag_white" />
 
-                <TextView
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_weight="2"
                     android:background="@color/color_flag_red" />
             </LinearLayout>
 
-            <TextView
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_weight="1"
@@ -212,19 +208,19 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_weight="3"
                     android:background="@color/color_flag_red" />
 
-                <TextView
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_weight="4"
                     android:background="@color/color_flag_white" />
 
-                <TextView
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_weight="2"
