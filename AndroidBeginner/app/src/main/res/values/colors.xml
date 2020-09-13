@@ -7,4 +7,9 @@
     <color name="color_background_textView2">#94EF63</color>
     <color name="text_color_button">#FFFFFF</color>
     <color name="background_color_menu_button">#6AADDF</color>
+    <color name="logo_et_user_bg_color">#50ffffff</color>
+    <color name="login_et_password_bg">#50ffffff</color>
+    <color name="login_button_login_bg">#4B82AC</color>
+    <color name="login_tv_forgot">#F3EEEE</color>
+    <color name="login_button_create_account_bg">#969798</color>
 </resources>
