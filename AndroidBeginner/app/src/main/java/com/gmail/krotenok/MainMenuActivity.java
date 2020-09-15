@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 public class MainMenuActivity extends Activity {
     private Button buttonSelectTextExchangeActivity;
     private Button buttonSelectFlagsActivity;
+    private Button buttonSelectImageActivity;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -22,6 +23,8 @@ public class MainMenuActivity extends Activity {
     private void initListenerButtonSelectActivity() {
         buttonSelectTextExchangeActivity = (Button) findViewById(R.id.button_menu_text_exchange_activity);
         buttonSelectFlagsActivity = (Button) findViewById(R.id.button_menu_flags_activity);
+        buttonSelectImageActivity = (Button) findViewById(R.id.button_menu_image_activity);
+
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -35,6 +38,10 @@ public class MainMenuActivity extends Activity {
                         intent = new Intent(MainMenuActivity.this, FlagsActivity.class);
                         break;
                     }
+                    case R.id.button_menu_image_activity: {
+                        intent = new Intent(MainMenuActivity.this, ImageActivity.class);
+                        break;
+                    }
                     default:
                         intent = null;
                 }
@@ -45,5 +52,6 @@ public class MainMenuActivity extends Activity {
         };
         buttonSelectTextExchangeActivity.setOnClickListener(onClickListener);
         buttonSelectFlagsActivity.setOnClickListener(onClickListener);
+        buttonSelectImageActivity.setOnClickListener(onClickListener);
     }
 }
