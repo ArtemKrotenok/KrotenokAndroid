@@ -11,9 +11,8 @@ import android.widget.ProgressBar;
 
 import androidx.annotation.Nullable;
 
+import com.gmail.krotenok.util.CircularTransformation;
 import com.squareup.picasso.Picasso;
-
-import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 public class ImageActivity extends Activity {
     private Button buttonLoadImage;
@@ -25,37 +24,44 @@ public class ImageActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image);
+        initVerbal();
         initListenerButton();
     }
 
-    private void initListenerButton() {
+    private void initVerbal() {
         buttonLoadImage = (Button) findViewById(R.id.button_load_image);
         imageView = (ImageView) findViewById(R.id.imageViewLoader);
         editText = (EditText) findViewById(R.id.editTextUrlImage);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
-        final String imageUrl = editText.getText().toString();
+    }
+
+    private void initListenerButton() {
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
-                Picasso.get()
-                        .load(imageUrl)
-                        .transform(new CropCircleTransformation())
-                        .into(imageView, new com.squareup.picasso.Callback() {
-                            @Override
-                            public void onSuccess() {
-                                progressBar.setVisibility(View.GONE);
-
-                            }
-
-                            @Override
-                            public void onError(Exception e) {
-                                Log.e("ERROR", e.getMessage());
-                            }
-                        });
+                onClickHandler();
             }
         };
         buttonLoadImage.setOnClickListener(onClickListener);
+    }
+
+    private void onClickHandler() {
+        String imageUrl = editText.getText().toString();
+        progressBar.setVisibility(View.VISIBLE);
+        Picasso.get()
+                .load(imageUrl)
+                .transform(new CircularTransformation())
+                .into(imageView, new com.squareup.picasso.Callback() {
+                    @Override
+                    public void onSuccess() {
+                        progressBar.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        Log.e("ERROR", e.getMessage());
+                    }
+                });
     }
 }
