@@ -6,4 +6,8 @@
     <string name="text_exchange_activity">TextExchangeActivity</string>
     <string name="flags_activity">FlagsActivity</string>
     <string name="future_menu_name">.....</string>
+    <string name="forgot_your_username_password"><u>Forgot your username/password ?</u></string>
+    <string name="login_button_login_text">LOG IN</string>
+    <string name="login_button_create_account">CREATE ACCOUNT</string>
+    <string name="login_linear_activity">LoginLinearActivity</string>
 </resources>
