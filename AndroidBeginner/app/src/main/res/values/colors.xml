@@ -7,4 +7,9 @@
     <color name="color_background_textView2">#94EF63</color>
     <color name="text_color_button">#FFFFFF</color>
     <color name="background_color_menu_button">#6AADDF</color>
+    <color name="color_flag_white">#FFFFFF</color>
+    <color name="color_flag_red">#E41708</color>
+    <color name="color_flag_green">#2EE605</color>
+    <color name="color_flag_blue">#057BD8</color>
+    <color name="color_flag_yellow">#F4CC04</color>
 </resources>
