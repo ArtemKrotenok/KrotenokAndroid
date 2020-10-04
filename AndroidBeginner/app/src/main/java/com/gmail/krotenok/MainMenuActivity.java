@@ -11,8 +11,9 @@ import androidx.annotation.Nullable;
 public class MainMenuActivity extends Activity {
     private Button buttonSelectTextExchangeActivity;
     private Button buttonSelectFlagsActivity;
+    private Button buttonSelectImageActivity;
     private Button buttonSelectLoginActivity;
-
+  
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +24,7 @@ public class MainMenuActivity extends Activity {
     private void initListenerButtonSelectActivity() {
         buttonSelectTextExchangeActivity = (Button) findViewById(R.id.button_menu_text_exchange_activity);
         buttonSelectFlagsActivity = (Button) findViewById(R.id.button_menu_flags_activity);
+        buttonSelectImageActivity = (Button) findViewById(R.id.button_menu_image_activity);
         buttonSelectLoginActivity = (Button) findViewById(R.id.button_menu_login_activity);
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
@@ -37,6 +39,9 @@ public class MainMenuActivity extends Activity {
                         intent = new Intent(MainMenuActivity.this, FlagsActivity.class);
                         break;
                     }
+                    case R.id.button_menu_image_activity: {
+                        intent = new Intent(MainMenuActivity.this, ImageActivity.class);
+
                     case R.id.button_menu_login_activity: {
                         intent = new Intent(MainMenuActivity.this, LoginLinearActivity.class);
                         break;
@@ -51,6 +56,7 @@ public class MainMenuActivity extends Activity {
         };
         buttonSelectTextExchangeActivity.setOnClickListener(onClickListener);
         buttonSelectFlagsActivity.setOnClickListener(onClickListener);
+        buttonSelectImageActivity.setOnClickListener(onClickListener);
         buttonSelectLoginActivity.setOnClickListener(onClickListener);
     }
 }
