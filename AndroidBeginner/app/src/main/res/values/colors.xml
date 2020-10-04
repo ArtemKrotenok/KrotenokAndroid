@@ -17,4 +17,9 @@
     <color name="color_flag_green">#2EE605</color>
     <color name="color_flag_blue">#057BD8</color>
     <color name="color_flag_yellow">#F4CC04</color>
+    <color name="black">#151515</color>
+    <color name="text_profile_user_data">#ffffff</color>
+    <color name="activity_profile_text_red">#d45807</color>
+    <color name="activity_profile_text_grey">#d4d3d3</color>
+    <color name="activity_profile_line">#4E4D4D</color>
 </resources>
