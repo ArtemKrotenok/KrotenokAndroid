@@ -13,7 +13,7 @@ public class MainMenuActivity extends Activity {
     private Button buttonSelectFlagsActivity;
     private Button buttonSelectImageActivity;
     private Button buttonSelectLoginActivity;
-  
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,11 +39,12 @@ public class MainMenuActivity extends Activity {
                         intent = new Intent(MainMenuActivity.this, FlagsActivity.class);
                         break;
                     }
-                    case R.id.button_menu_image_activity: {
-                        intent = new Intent(MainMenuActivity.this, ImageActivity.class);
-
                     case R.id.button_menu_login_activity: {
                         intent = new Intent(MainMenuActivity.this, LoginLinearActivity.class);
+                        break;
+                    }
+                    case R.id.button_menu_image_activity: {
+                        intent = new Intent(MainMenuActivity.this, ImageActivity.class);
                         break;
                     }
                     default:
