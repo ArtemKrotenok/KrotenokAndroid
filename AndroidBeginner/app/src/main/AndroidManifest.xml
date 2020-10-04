@@ -15,7 +15,8 @@
         </activity>
         <activity android:name=".TextExchangeActivity"/>
         <activity android:name=".FlagsActivity"/>
-        <activity android:name=".ImageActivity"/>
+        <activity android:name=".ImageActivity"/> 
+        <activity android:name=".LoginLinearActivity" />
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

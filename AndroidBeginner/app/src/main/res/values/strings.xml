@@ -9,4 +9,8 @@
     <string name="image_activity">ImageActivity</string>
     <string name="download_image">Download image</string>
     <string name="text_url">https://klike.net/uploads/posts/2019-11/1572608828_2.jpg</string>
+    <string name="forgot_your_username_password"><u>Forgot your username/password ?</u></string>
+    <string name="login_button_login_text">LOG IN</string>
+    <string name="login_button_create_account">CREATE ACCOUNT</string>
+    <string name="login_linear_activity">LoginLinearActivity</string>
 </resources>
