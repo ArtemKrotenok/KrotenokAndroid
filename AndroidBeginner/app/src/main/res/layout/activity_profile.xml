@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imageViewBell"
+        android:layout_width="@dimen/activity_profile_bell_width"
+        android:layout_height="@dimen/activity_profile_bell_height"
+        android:layout_marginStart="@dimen/activity_profile_bell_margin_start"
+        android:layout_marginTop="@dimen/activity_profile_bell_margin_top"
+        android:src="@drawable/bell" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_profile_avatar_margin_top"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <ImageView
+            android:id="@+id/imageViewUserAvatar"
+            android:layout_width="@dimen/activity_profile_avatar_width"
+            android:layout_height="@dimen/activity_profile_avatar_height"
+            android:layout_marginStart="@dimen/activity_profile_avatar_margin_start"
+            android:layout_weight="1"
+            android:src="@android:drawable/sym_def_app_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="2"
+            android:fontFamily="@font/monda_bold"
+            android:gravity="center"
+            android:text="Dylan Conner"
+            android:textColor="@color/text_profile_user_data"
+            android:textSize="@dimen/activity_profile_avatar_username" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_profile_user_data_margin_top"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_profile_follow_margin_start"
+            android:layout_marginEnd="@dimen/activity_profile_follow_margin_end"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/monda_regular"
+                    android:text="TROPHIES"
+                    android:textColor="@color/activity_profile_text_grey"
+                    android:textSize="@dimen/activity_profile_text_size_follow" />
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/monda_bold"
+                    android:text="4"
+                    android:textColor="@color/activity_profile_text_red"
+                    android:textSize="@dimen/activity_profile_text_size_follow_value" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/monda_regular"
+                    android:text="FOLLOWING"
+                    android:textColor="@color/activity_profile_text_grey"
+                    android:textSize="@dimen/activity_profile_text_size_follow" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/monda_bold"
+                    android:text="54"
+                    android:textColor="@color/activity_profile_text_red"
+                    android:textSize="@dimen/activity_profile_text_size_follow_value" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/monda_regular"
+                    android:text="FOLLOWERS"
+                    android:textColor="@color/activity_profile_text_grey"
+                    android:textSize="@dimen/activity_profile_text_size_follow" />
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/monda_bold"
+                    android:text="12"
+                    android:textColor="@color/activity_profile_text_red"
+                    android:textSize="@dimen/activity_profile_text_size_follow_value" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_profile_line_height"
+            android:layout_marginStart="@dimen/activity_profile_line_margin_start"
+            android:layout_marginEnd="@dimen/activity_profile_margin_end"
+            android:background="@color/activity_profile_line"
+            android:orientation="vertical" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/activity_profile_margin_start_user_data"
+            android:layout_marginTop="@dimen/activity_profile_margin_top_user_data"
+            android:layout_marginEnd="@dimen/activity_profile_margin_end_user_data"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/textViewName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/monda_regular"
+                android:text="NAME"
+                android:textColor="@color/activity_profile_text_grey"
+                android:textSize="@dimen/activity_profile_text_size_follow" />
+
+            <TextView
+                android:id="@+id/textViewNameValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/monda_regular"
+                android:text="Nial Brockman"
+                android:textColor="@color/text_profile_user_data"
+                android:textSize="@dimen/activity_profile_text_size_value_data_user" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/activity_profile_margin_start_user_data"
+            android:layout_marginTop="@dimen/activity_profile_margin_top_user_data"
+            android:layout_marginEnd="@dimen/activity_profile_margin_end_user_data"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/textViewCountry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/monda_regular"
+                android:text="COUNTRY"
+                android:textColor="@color/activity_profile_text_grey"
+                android:textSize="@dimen/activity_profile_text_size_follow" />
+
+            <TextView
+                android:id="@+id/textViewCountryValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/monda_regular"
+                android:text="USA"
+                android:textColor="@color/text_profile_user_data"
+                android:textSize="@dimen/activity_profile_text_size_value_data_user" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/activity_profile_margin_start_user_data"
+            android:layout_marginTop="@dimen/activity_profile_margin_top_user_data"
+            android:layout_marginEnd="@dimen/activity_profile_margin_end_user_data"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/textViewPostalCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/monda_regular"
+                android:text="POSTAL CODE"
+                android:textColor="@color/activity_profile_text_grey"
+                android:textSize="@dimen/activity_profile_text_size_follow" />
+
+            <TextView
+                android:id="@+id/textViewPostalCodeValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/monda_regular"
+                android:text="60604"
+                android:textColor="@color/text_profile_user_data"
+                android:textSize="@dimen/activity_profile_text_size_value_data_user" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/activity_profile_margin_start_user_data"
+            android:layout_marginTop="@dimen/activity_profile_margin_top_user_data"
+            android:layout_marginEnd="@dimen/activity_profile_margin_end_user_data"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/textViewDateOfBirth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/monda_regular"
+                android:text="DATE OF BIRTH"
+                android:textColor="@color/activity_profile_text_grey"
+                android:textSize="@dimen/activity_profile_text_size_follow" />
+
+            <TextView
+                android:id="@+id/textViewDateOfBirthValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/monda_regular"
+                android:text="Feb. 21, 2000"
+                android:textColor="@color/text_profile_user_data"
+                android:textSize="@dimen/activity_profile_text_size_value_data_user" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/activity_profile_margin_start_user_data"
+            android:layout_marginTop="@dimen/activity_profile_margin_top_user_data"
+            android:layout_marginEnd="@dimen/activity_profile_margin_end_user_data"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/textViewGender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/monda_regular"
+                android:text="GENDER"
+                android:textColor="@color/activity_profile_text_grey"
+                android:textSize="@dimen/activity_profile_text_size_follow" />
+
+            <TextView
+                android:id="@+id/textViewGenderValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/monda_regular"
+                android:text="Male"
+                android:textColor="@color/text_profile_user_data"
+                android:textSize="@dimen/activity_profile_text_size_value_data_user" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/activity_profile_margin_start_user_data"
+            android:layout_marginTop="@dimen/activity_profile_margin_top_user_data"
+            android:layout_marginEnd="@dimen/activity_profile_margin_end_user_data"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/textViewHeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/monda_regular"
+                android:text="HEIGHT"
+                android:textColor="@color/activity_profile_text_grey"
+                android:textSize="@dimen/activity_profile_text_size_follow" />
+
+            <TextView
+                android:id="@+id/textViewHeightValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/monda_regular"
+                android:text="6'1''"
+                android:textColor="@color/text_profile_user_data"
+                android:textSize="@dimen/activity_profile_text_size_value_data_user" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/activity_profile_margin_start_user_data"
+            android:layout_marginTop="@dimen/activity_profile_margin_top_user_data"
+            android:layout_marginEnd="@dimen/activity_profile_margin_end_user_data"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/textViewPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/monda_regular"
+                android:text="PHONE"
+                android:textColor="@color/activity_profile_text_grey"
+                android:textSize="@dimen/activity_profile_text_size_follow" />
+
+            <TextView
+                android:id="@+id/textViewPhoneValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/monda_regular"
+                android:text="(781)547-3320"
+                android:textColor="@color/text_profile_user_data"
+                android:textSize="@dimen/activity_profile_text_size_value_data_user" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

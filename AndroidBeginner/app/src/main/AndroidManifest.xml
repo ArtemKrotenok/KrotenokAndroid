@@ -1,5 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.gmail.krotenok">
+
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -13,10 +15,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TextExchangeActivity"/>
-        <activity android:name=".FlagsActivity"/>
-        <activity android:name=".ImageActivity"/> 
+        <activity android:name=".TextExchangeActivity" />
+        <activity android:name=".FlagsActivity" />
+        <activity android:name=".ImageActivity" />
         <activity android:name=".LoginLinearActivity" />
+        <activity android:name=".ProfileActivity" />
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
