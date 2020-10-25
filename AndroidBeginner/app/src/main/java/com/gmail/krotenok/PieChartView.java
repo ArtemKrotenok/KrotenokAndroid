@@ -15,18 +15,18 @@ import java.util.Collections;
 import java.util.List;
 
 public class PieChartView extends View {
-    public static final int FULL_ARC = 360;
-    public static final int OUT_TEXT_SIZE = 80;
-    public static final int OUT_TEXT_COLOR = Color.WHITE;
-    public static final float TEXT_CORRECTION_Y = 0.8f;
-    public static final float TEXT_CORRECTION_X = -1f;
-    public static final int DESIRED_WIDTH = 950;
-    public static final int DESIRED_HEIGHT = 950;
-    private List<Integer> inputDataList;
-    private List<Integer> resultPercentList;
-    private Paint rectPaint;
-    private Paint textPaint;
-    private RectF oval;
+    private static final int FULL_ARC = 360;
+    private static final int OUT_TEXT_SIZE = 80;
+    private static final int OUT_TEXT_COLOR = Color.WHITE;
+    private static final float TEXT_CORRECTION_Y = 0.8f;
+    private static final float TEXT_CORRECTION_X = -1f;
+    private static final int DESIRED_WIDTH = 950;
+    private static final int DESIRED_HEIGHT = 950;
+    private List<Integer> inputDataList = new ArrayList<>();
+    private List<Integer> resultPercentList = new ArrayList<>();
+    private Paint rectPaint = new Paint();
+    private Paint textPaint = new Paint();
+    private RectF ovalRectF = new RectF();
 
     public PieChartView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -35,17 +35,21 @@ public class PieChartView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        oval.set(0, 0, getMeasuredHeight(), getMeasuredWidth());
-        resultPercentList = getResultPercentList(inputDataList);
         if (!resultPercentList.isEmpty()) {
             drawDataDiagram(canvas, resultPercentList);
         }
     }
 
     @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        ovalRectF.set(0, 0, getMeasuredHeight(), getMeasuredWidth());
+    }
+
+    @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int desiredWidth = DESIRED_WIDTH;
-        int desiredHeight = DESIRED_HEIGHT;
+        int desiredWidth = getHeight();
+        int desiredHeight = getWidth();
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
@@ -71,20 +75,19 @@ public class PieChartView extends View {
     }
 
     private void initVerbal() {
-        rectPaint = new Paint();
-        textPaint = new Paint();
+        rectPaint.setAntiAlias(true);
+        textPaint.setAntiAlias(true);
         textPaint.setColor(OUT_TEXT_COLOR);
         textPaint.setTextSize(OUT_TEXT_SIZE);
-        oval = new RectF();
-        resultPercentList = new ArrayList<>();
+        ovalRectF.set(0, 0, getHeight(), getWidth());
     }
 
     public void setData(List<Integer> inputDataList) {
         {
-            this.inputDataList = new ArrayList<>();
             if (inputDataList != null) {
                 this.inputDataList = inputDataList;
             }
+            resultPercentList = getResultPercentList(inputDataList);
             invalidate();
         }
     }
@@ -103,11 +106,9 @@ public class PieChartView extends View {
                 sweepAngle = percent;
             }
             rectPaint.setColor(getNextColor(rectPaint.getColor()));
-            canvas.drawArc(oval, startAngle, sweepAngle, true, rectPaint);
-
-            outTextX = getOutTextX(startAngle, sweepAngle, oval);
-            outTextY = getOutTextY(startAngle, sweepAngle, oval);
-
+            canvas.drawArc(ovalRectF, startAngle, sweepAngle, true, rectPaint);
+            outTextX = getOutTextX(startAngle, sweepAngle, ovalRectF);
+            outTextY = getOutTextY(startAngle, sweepAngle, ovalRectF);
             canvas.drawText(getPercentText(sweepAngle), outTextX, outTextY, textPaint);
             startAngle = startAngle + sweepAngle;
         }

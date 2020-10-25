@@ -11,12 +11,12 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:orientation="vertical"
-        android:weightSum="100">
+        android:orientation="vertical">
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="400dp">
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
             <com.gmail.krotenok.PieChartView
                 android:id="@+id/viewPieChart"
@@ -53,6 +53,7 @@
             android:id="@+id/buttonShowPieChart"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:layout_marginBottom="10dp"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:background="@color/background_color_menu_button"
