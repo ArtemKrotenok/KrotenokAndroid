@@ -14,6 +14,7 @@ public class MainMenuActivity extends Activity {
     private Button buttonSelectImageActivity;
     private Button buttonSelectLoginActivity;
     private Button buttonSelectProfileActivity;
+    private Button buttonSelectWatchViewActivity;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,6 +29,7 @@ public class MainMenuActivity extends Activity {
         buttonSelectImageActivity = (Button) findViewById(R.id.button_menu_image_activity);
         buttonSelectLoginActivity = (Button) findViewById(R.id.button_menu_login_activity);
         buttonSelectProfileActivity = (Button) findViewById(R.id.button_menu_profile_activity);
+        buttonSelectWatchViewActivity = (Button) findViewById(R.id.button_menu_watch_view_activity);
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,6 +55,10 @@ public class MainMenuActivity extends Activity {
                         intent = new Intent(MainMenuActivity.this, ProfileActivity.class);
                         break;
                     }
+                    case R.id.button_menu_watch_view_activity: {
+                        intent = new Intent(MainMenuActivity.this, WatchViewActivity.class);
+                        break;
+                    }
                     default:
                         intent = null;
                 }
@@ -66,5 +72,6 @@ public class MainMenuActivity extends Activity {
         buttonSelectImageActivity.setOnClickListener(onClickListener);
         buttonSelectLoginActivity.setOnClickListener(onClickListener);
         buttonSelectProfileActivity.setOnClickListener(onClickListener);
+        buttonSelectWatchViewActivity.setOnClickListener(onClickListener);
     }
 }
