@@ -59,6 +59,8 @@ public class MainMenuActivity extends Activity {
                     }
                     case R.id.button_menu_watch_view_activity: {
                         intent = new Intent(MainMenuActivity.this, WatchViewActivity.class);
+                        break;
+                    }
                     case R.id.button_menu_pie_chart_activity: {
                         intent = new Intent(MainMenuActivity.this, PieChartActivity.class);
                         break;
