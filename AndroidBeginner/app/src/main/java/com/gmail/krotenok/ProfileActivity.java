@@ -7,7 +7,6 @@ import android.widget.ImageView;
 import androidx.annotation.Nullable;
 
 import com.gmail.krotenok.util.CircularBorderTransformation;
-import com.gmail.krotenok.util.CircularTransformation;
 import com.squareup.picasso.Picasso;
 
 public class ProfileActivity extends Activity {
