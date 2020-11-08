@@ -15,6 +15,7 @@ public class MainMenuActivity extends Activity {
     private Button buttonSelectLoginActivity;
     private Button buttonSelectProfileActivity;
     private Button buttonSelectWatchViewActivity;
+    private Button buttonSelectPieChartActivity;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class MainMenuActivity extends Activity {
         buttonSelectLoginActivity = (Button) findViewById(R.id.button_menu_login_activity);
         buttonSelectProfileActivity = (Button) findViewById(R.id.button_menu_profile_activity);
         buttonSelectWatchViewActivity = (Button) findViewById(R.id.button_menu_watch_view_activity);
+        buttonSelectPieChartActivity = (Button) findViewById(R.id.button_menu_pie_chart_activity);
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,6 +59,8 @@ public class MainMenuActivity extends Activity {
                     }
                     case R.id.button_menu_watch_view_activity: {
                         intent = new Intent(MainMenuActivity.this, WatchViewActivity.class);
+                    case R.id.button_menu_pie_chart_activity: {
+                        intent = new Intent(MainMenuActivity.this, PieChartActivity.class);
                         break;
                     }
                     default:
@@ -73,5 +77,6 @@ public class MainMenuActivity extends Activity {
         buttonSelectLoginActivity.setOnClickListener(onClickListener);
         buttonSelectProfileActivity.setOnClickListener(onClickListener);
         buttonSelectWatchViewActivity.setOnClickListener(onClickListener);
+        buttonSelectPieChartActivity.setOnClickListener(onClickListener);
     }
 }

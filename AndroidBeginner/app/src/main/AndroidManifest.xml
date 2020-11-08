@@ -21,5 +21,6 @@
         <activity android:name=".LoginLinearActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".WatchViewActivity" />
+        <activity android:name=".PieChartActivity" />
     </application>
 </manifest>
