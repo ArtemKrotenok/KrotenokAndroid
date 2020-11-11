@@ -18,4 +18,5 @@
     <string name="pie_chart_view_button">PieChartView</string>
     <string name="pie_chart_show_button">SHOW</string>
     <string name="pie_chart_no_data_text">NO DATA</string>
+    <string name="text_button_equalizer_view">EqualizerView</string>
 </resources>
