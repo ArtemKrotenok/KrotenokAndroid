@@ -20,8 +20,7 @@
         <activity android:name=".ImageActivity" />
         <activity android:name=".LoginLinearActivity" />
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".PieChartActivity" />
         <activity android:name=".WatchViewActivity" />
-        <activity android:name=".EqualizerViewActivity" />
+        <activity android:name=".PieChartActivity" />
     </application>
 </manifest>
