@@ -19,7 +19,7 @@ public class EqualizerViewActivity extends Activity {
         textView.setText(getFormatResult(equalizerView.getPercentColumnDataList()));
         equalizerView.setOnEqualizerListener(new OnEqualizerListener() {
             @Override
-            public void OnEqualizerDataChanged(int[] values) {
+            public void onEqualizerDataChanged(int[] values) {
                 textView.setText(getFormatResult(values));
             }
         });

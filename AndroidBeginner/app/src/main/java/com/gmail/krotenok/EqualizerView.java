@@ -67,7 +67,7 @@ public class EqualizerView extends View {
                 float dataLengthColumn = bottomY - y;
                 float percentDataColumn = (dataLengthColumn / fullLengthColumn) * 100f;
                 percentColumnDataList[i] = Math.round(percentDataColumn);
-                onEqualizerListener.OnEqualizerDataChanged(percentColumnDataList);
+                onEqualizerListener.onEqualizerDataChanged(percentColumnDataList);
             }
         }
     }
@@ -82,6 +82,11 @@ public class EqualizerView extends View {
             float fullLengthColumn = bottomY - topY;
             int topYDataColumn = Math.round(fullLengthColumn * percentColumnDataList[i] / 100f);
             columnData.top = bottomY - topYDataColumn;
+            int margin = Math.round(columnBorderPaint.getStrokeWidth() / 2);
+            columnData.left = columnData.left + margin;
+            columnData.right = columnData.right - margin;
+            columnData.bottom = columnData.bottom - margin;
+            columnData.top = columnData.top + margin;
             canvas.drawRect(columnData, columnPaint);
         }
     }
