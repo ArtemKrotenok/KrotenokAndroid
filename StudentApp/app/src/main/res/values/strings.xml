@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Student app</string>
+    <string name="button_text_edit">EDIT</string>
+    <string name="button_text_delete">DELETE</string>
+    <string name="edit_text_hint_image_url">Image URL</string>
+    <string name="edit_text_hint_name">Name</string>
+    <string name="edit_text_hint_age">Age</string>
+    <string name="button_text_save">SAVE</string>
+    <string name="edit_text_hint_search">Search</string>
+</resources>
