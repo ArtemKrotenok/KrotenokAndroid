@@ -20,4 +20,6 @@
     <dimen name="dit_text_size_text_search">30sp</dimen>
     <dimen name="recycler_view_margin">8dp</dimen>
     <dimen name="student_add_button_size">100dp</dimen>
+    <dimen name="margin_button_item">10dp</dimen>
+    <dimen name="margin_top_item">10dp</dimen>
 </resources>

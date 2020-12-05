@@ -12,24 +12,21 @@ import androidx.annotation.Nullable;
 
 import com.gmail.artemkrot.repository.StudentRepository;
 import com.gmail.artemkrot.repository.model.Student;
+import com.gmail.artemkrot.util.ValidUtil;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 
 public class StudentEditActivity extends Activity {
-    private static final String TEXT_MESSAGE_ALL_FIELDS_MUST_BE_FILLED = "All fields must be filled";
-    private static final String TEXT_MESSAGE_UNCORRECTED_IMAGE_URL = "Uncorrected Image URL";
-    private static final String TEXT_MESSAGE_UNCORRECTED_AGE = "Uncorrected AGE";
-    private static final String PATTERN_REGEX_IMAGE_URL = "^http.+|^www.+";
+    public static final String EDIT_STUDENT_ID = "edit_student_id";
+    public static final long ADD_NEW_STUDENT = -1L;
+    private static final long DEFAULT_VALUE_STUDENT_ID = 0L;
     private static final int MIN_STUDENT_AGE = 18;
     private static final int MAX_STUDENT_AGE = 100;
-    private static final String TEXT_MESSAGE_STUDENT_CHANGE_SAVED = "Change student data saved";
-    private static final String TEXT_MESSAGE_STUDENT_ADD = "New student add";
     private Button buttonSaveStudent;
     private EditText editTextImageUrl;
     private EditText editTextName;
     private EditText editTextAge;
-    private StudentRepository studentRepository;
+    private StudentRepository studentRepository = StudentRepository.getInstance();
     private long studentId;
 
     @Override
@@ -44,10 +41,8 @@ public class StudentEditActivity extends Activity {
         editTextImageUrl = (EditText) findViewById(R.id.edit_text_image_url);
         editTextName = (EditText) findViewById(R.id.edit_text_name);
         editTextAge = (EditText) findViewById(R.id.edit_text_age);
-        studentRepository = StudentRepository.getInstance();
-        Bundle arguments = getIntent().getExtras();
-        studentId = Long.parseLong(arguments.get(StudentListActivity.STUDENT_ID).toString());
-        if (studentId != 0l) {
+        studentId = getIntent().getLongExtra(EDIT_STUDENT_ID, DEFAULT_VALUE_STUDENT_ID);
+        if (studentId != ADD_NEW_STUDENT) {
             setValue();
         }
     }
@@ -64,40 +59,43 @@ public class StudentEditActivity extends Activity {
         View.OnClickListener buttonSaveStudentOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handleButtonSaveStudentOnClick();
+                handleSaveOnClick();
             }
         };
         buttonSaveStudent.setOnClickListener(buttonSaveStudentOnClickListener);
     }
 
-    private void handleButtonSaveStudentOnClick() {
+    private void handleSaveOnClick() {
         if (inputValid()) {
-            if (studentId == 0L) {
+            if (studentId == ADD_NEW_STUDENT) {
                 Toast toast = Toast.makeText(getApplicationContext(),
-                        TEXT_MESSAGE_STUDENT_ADD, Toast.LENGTH_SHORT);
+                        getString(R.string.text_message_student_add),
+                        Toast.LENGTH_SHORT);
                 toast.show();
-                addNewStudentInBD();
+                addNewStudent();
             } else {
                 Toast toast = Toast.makeText(getApplicationContext(),
-                        TEXT_MESSAGE_STUDENT_CHANGE_SAVED, Toast.LENGTH_SHORT);
+                        getString(R.string.text_message_student_change_saved),
+                        Toast.LENGTH_SHORT);
                 toast.show();
-                updateStudentInBD(studentId);
+                updateStudent(studentId);
             }
             Intent intent = new Intent(StudentEditActivity.this, StudentListActivity.class);
+            intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
         }
     }
 
-    private void updateStudentInBD(long studentId) {
-        Student studentBD = studentRepository.findById(studentId);
-        studentBD.setName(editTextName.getText().toString());
-        studentBD.setImageUrl(editTextImageUrl.getText().toString());
-        studentBD.setAge(Integer.parseInt(editTextAge.getText().toString()));
-        studentRepository.update(studentBD);
+    private void updateStudent(long studentId) {
+        Student student = studentRepository.findById(studentId);
+        student.setName(editTextName.getText().toString());
+        student.setImageUrl(editTextImageUrl.getText().toString());
+        student.setAge(Integer.parseInt(editTextAge.getText().toString()));
+        studentRepository.update(student);
     }
 
-    private void addNewStudentInBD() {
+    private void addNewStudent() {
         Student newStudent = new Student();
         newStudent.setName(editTextName.getText().toString());
         newStudent.setImageUrl(editTextImageUrl.getText().toString());
@@ -111,12 +109,12 @@ public class StudentEditActivity extends Activity {
 
     private boolean ageValid() {
         if (editTextAge.getText().toString().equals("")) {
-            showErrorMessageEmptyField();
+            showEmptyField();
             return false;
         }
         int age = Integer.parseInt(editTextAge.getText().toString());
         if (age < MIN_STUDENT_AGE || age > MAX_STUDENT_AGE) {
-            showErrorMessageUncorrectedAge();
+            showUncorrectedAge();
             return false;
         }
         return true;
@@ -124,7 +122,7 @@ public class StudentEditActivity extends Activity {
 
     private boolean nameValid() {
         if (editTextName.getText().toString().equals("")) {
-            showErrorMessageEmptyField();
+            showEmptyField();
             return false;
         }
         return true;
@@ -132,34 +130,32 @@ public class StudentEditActivity extends Activity {
 
     private boolean imageUrlValid() {
         if (editTextImageUrl.getText().toString().equals("")) {
-            showErrorMessageEmptyField();
+            showEmptyField();
             return false;
         }
         String textImageUrl = editTextImageUrl.getText().toString();
-        Pattern pattern = Pattern.compile(PATTERN_REGEX_IMAGE_URL);
-        Matcher matcher = pattern.matcher(textImageUrl);
-        if (!matcher.matches()) {
-            showErrorMessageUncorrectedImageUrl();
+        if (!ValidUtil.isValidUrl(textImageUrl)) {
+            showUncorrectedImageUrl();
             return false;
         }
         return true;
     }
 
-    private void showErrorMessageUncorrectedImageUrl() {
+    private void showUncorrectedImageUrl() {
         Toast toast = Toast.makeText(getApplicationContext(),
-                TEXT_MESSAGE_UNCORRECTED_IMAGE_URL, Toast.LENGTH_SHORT);
+                getString(R.string.text_message_uncorrected_image_url), Toast.LENGTH_SHORT);
         toast.show();
     }
 
-    private void showErrorMessageEmptyField() {
+    private void showEmptyField() {
         Toast toast = Toast.makeText(getApplicationContext(),
-                TEXT_MESSAGE_ALL_FIELDS_MUST_BE_FILLED, Toast.LENGTH_SHORT);
+                getString(R.string.text_message_all_fields_must_be_filled), Toast.LENGTH_SHORT);
         toast.show();
     }
 
-    private void showErrorMessageUncorrectedAge() {
+    private void showUncorrectedAge() {
         Toast toast = Toast.makeText(getApplicationContext(),
-                TEXT_MESSAGE_UNCORRECTED_AGE, Toast.LENGTH_SHORT);
+                getString(R.string.text_message_uncorrected_age), Toast.LENGTH_SHORT);
         toast.show();
     }
 }

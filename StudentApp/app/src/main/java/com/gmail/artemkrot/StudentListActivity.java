@@ -15,17 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gmail.artemkrot.repository.StudentRepository;
-import com.gmail.artemkrot.repository.model.Student;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class StudentListActivity extends Activity {
-
-    public static final String STUDENT_ID = "student_id";
-    private StudentRepository studentRepository;
+    private StudentRepository studentRepository = StudentRepository.getInstance();
     private EditText editText;
-    private List<Student> studentList;
     private RecyclerView recyclerView;
     private StudentRecyclerViewAdapter adapter;
     private Button studentAddButton;
@@ -36,14 +29,11 @@ public class StudentListActivity extends Activity {
         setContentView(R.layout.activity_student_list);
         initVerbals();
         initEditTextListener();
-        initStudentAddButtonListener();
+        initAddListener();
         initRecyclerView();
     }
 
     private void initVerbals() {
-        studentRepository = StudentRepository.getInstance();
-        studentList = new ArrayList<>();
-        studentList.addAll(studentRepository.getAllSortByName());
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         studentAddButton = (Button) findViewById(R.id.student_add_button);
         editText = (EditText) findViewById(R.id.edit_text_search);
@@ -52,17 +42,17 @@ public class StudentListActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        studentList.clear();
-        studentList.addAll(studentRepository.getAllSortByName());
+        adapter.clear();
+        adapter.addAll(studentRepository.getAllSortByName());
         adapter.notifyDataSetChanged();
     }
 
-    private void initStudentAddButtonListener() {
+    private void initAddListener() {
         View.OnClickListener studentAddButtonOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(StudentListActivity.this, StudentEditActivity.class);
-                intent.putExtra(STUDENT_ID, "0");
+                intent.putExtra(StudentEditActivity.EDIT_STUDENT_ID, StudentEditActivity.ADD_NEW_STUDENT);
                 startActivity(intent);
             }
         };
@@ -100,11 +90,11 @@ public class StudentListActivity extends Activity {
             @Override
             public void onStudentClick(long studentId) {
                 Intent intent = new Intent(StudentListActivity.this, StudentDetailsActivity.class);
-                intent.putExtra(STUDENT_ID, studentId);
+                intent.putExtra(StudentDetailsActivity.DETAILS_STUDENT_ID, studentId);
                 startActivity(intent);
             }
         };
-        adapter = new StudentRecyclerViewAdapter(studentList, onStudentClickListener);
+        adapter = new StudentRecyclerViewAdapter(studentRepository.getAllSortByName(), onStudentClickListener);
         recyclerView.setAdapter(adapter);
     }
 }

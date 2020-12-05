@@ -7,4 +7,10 @@
     <string name="edit_text_hint_age">Age</string>
     <string name="button_text_save">SAVE</string>
     <string name="edit_text_hint_search">Search</string>
+    <string name="text_message_all_fields_must_be_filled">All fields must be filled</string>
+    <string name="text_message_uncorrected_image_url">Uncorrected Image URL</string>
+    <string name="text_message_uncorrected_age">Uncorrected AGE</string>
+    <string name="text_message_student_change_saved">Change student data saved</string>
+    <string name="text_message_student_add">New student add</string>
+    <string name="text_message_student_delete">Student was deleted</string>
 </resources>

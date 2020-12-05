@@ -16,13 +16,14 @@ import com.gmail.artemkrot.repository.model.Student;
 import com.squareup.picasso.Picasso;
 
 public class StudentDetailsActivity extends Activity {
-    private static final String TEXT_MESSAGE_STUDENT_DELETE = "Student was deleted";
+    public static final String DETAILS_STUDENT_ID = "details_student_id";
+    private static final long DEFAULT_VALUE_STUDENT_ID = 0L;
     private Button buttonEditStudent;
     private Button buttonDeleteStudent;
     private TextView textViewStudentName;
     private TextView textViewStudentAge;
     private ImageView imageViewStudent;
-    private StudentRepository studentRepository;
+    private StudentRepository studentRepository = StudentRepository.getInstance();
     private long studentId;
 
     @Override
@@ -40,9 +41,7 @@ public class StudentDetailsActivity extends Activity {
         textViewStudentAge = (TextView) findViewById(R.id.text_view_student_age_details);
         buttonEditStudent = (Button) findViewById(R.id.button_student_edit);
         buttonDeleteStudent = (Button) findViewById(R.id.button_student_delete);
-        studentRepository = StudentRepository.getInstance();
-        Bundle arguments = getIntent().getExtras();
-        studentId = Long.parseLong(arguments.get(StudentListActivity.STUDENT_ID).toString());
+        studentId = getIntent().getLongExtra(DETAILS_STUDENT_ID, DEFAULT_VALUE_STUDENT_ID);
     }
 
     private void setValue() {
@@ -58,7 +57,7 @@ public class StudentDetailsActivity extends Activity {
         View.OnClickListener buttonDeleteStudentOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handleButtonDeleteStudentOnClick();
+                handleDeleteOnClick();
             }
         };
 
@@ -67,27 +66,25 @@ public class StudentDetailsActivity extends Activity {
         View.OnClickListener buttonEditStudentOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handleButtonEditStudentOnClick();
+                handleEditOnClick();
             }
         };
         buttonEditStudent.setOnClickListener(buttonEditStudentOnClickListener);
     }
 
-    private void handleButtonEditStudentOnClick() {
+    private void handleEditOnClick() {
         Intent intent = new Intent(StudentDetailsActivity.this,
                 StudentEditActivity.class);
-        intent.putExtra(StudentListActivity.STUDENT_ID, studentId);
+        intent.putExtra(StudentEditActivity.EDIT_STUDENT_ID, studentId);
         startActivity(intent);
     }
 
-    private void handleButtonDeleteStudentOnClick() {
+    private void handleDeleteOnClick() {
         studentRepository.delete(studentId);
         Toast toast = Toast.makeText(getApplicationContext(),
-                TEXT_MESSAGE_STUDENT_DELETE, Toast.LENGTH_SHORT);
+                getString(R.string.text_message_student_delete),
+                Toast.LENGTH_SHORT);
         toast.show();
-        Intent intent = new Intent(StudentDetailsActivity.this,
-                StudentListActivity.class);
-        startActivity(intent);
         finish();
     }
 }

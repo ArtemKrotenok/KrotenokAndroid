@@ -88,6 +88,14 @@ public class StudentRecyclerViewAdapter
         };
     }
 
+    public void clear() {
+        studentList.clear();
+    }
+
+    public void addAll(List<Student> list) {
+        studentList.addAll(list);
+    }
+
     static class StudentViewHolder extends RecyclerView.ViewHolder {
         private ImageView studentImage;
         private TextView studentName;

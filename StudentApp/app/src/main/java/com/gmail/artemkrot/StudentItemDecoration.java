@@ -10,8 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class StudentItemDecoration extends RecyclerView.ItemDecoration {
     public static final int STROKE_WIDTH_ITEM_LINE = 10;
-    public static final int MARGIN_BUTTON_ITEM = 50;
-    public static final int MARGIN_TOP_ITEM = 50;
     private Paint linePaint;
 
     public StudentItemDecoration() {
@@ -26,8 +24,10 @@ public class StudentItemDecoration extends RecyclerView.ItemDecoration {
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent,
                                RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
-        outRect.bottom = outRect.bottom + MARGIN_BUTTON_ITEM;
-        outRect.top = outRect.top + MARGIN_TOP_ITEM;
+        outRect.bottom = outRect.bottom +
+                Math.round(view.getResources().getDimension(R.dimen.margin_button_item));
+        outRect.top = outRect.top +
+                Math.round(view.getResources().getDimension(R.dimen.margin_top_item));
     }
 
     @Override

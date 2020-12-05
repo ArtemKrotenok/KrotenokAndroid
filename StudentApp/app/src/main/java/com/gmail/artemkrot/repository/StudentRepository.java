@@ -15,6 +15,7 @@ public class StudentRepository {
     private long id = 0L;
 
     private StudentRepository() {
+
         for (int i = 0; i < COUNT_RANDOM_STUDENTS; i++) {
             Student randomStudent = RandomStudent.getRandomStudent();
             add(randomStudent);
