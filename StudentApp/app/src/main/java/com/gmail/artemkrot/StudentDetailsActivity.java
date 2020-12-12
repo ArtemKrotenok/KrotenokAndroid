@@ -46,6 +46,13 @@ public class StudentDetailsActivity extends Activity {
 
     private void setValue() {
         Student student = studentRepository.findById(studentId);
+        if (student == null) {
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    getString(R.string.text_message_student_not_found),
+                    Toast.LENGTH_SHORT);
+            toast.show();
+            finish();
+        }
         textViewStudentName.setText(student.getName());
         textViewStudentAge.setText(student.getAge().toString());
         Picasso.get()

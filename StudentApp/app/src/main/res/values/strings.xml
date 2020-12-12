@@ -13,4 +13,5 @@
     <string name="text_message_student_change_saved">Change student data saved</string>
     <string name="text_message_student_add">New student add</string>
     <string name="text_message_student_delete">Student was deleted</string>
+    <string name="text_message_student_not_found">Sorry, student not found</string>
 </resources>

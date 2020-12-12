@@ -44,7 +44,6 @@ public class StudentListActivity extends Activity {
         super.onResume();
         adapter.clear();
         adapter.addAll(studentRepository.getAllSortByName());
-        adapter.notifyDataSetChanged();
     }
 
     private void initAddListener() {

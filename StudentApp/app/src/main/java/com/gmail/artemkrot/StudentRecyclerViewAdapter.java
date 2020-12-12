@@ -90,10 +90,12 @@ public class StudentRecyclerViewAdapter
 
     public void clear() {
         studentList.clear();
+        notifyDataSetChanged();
     }
 
     public void addAll(List<Student> list) {
         studentList.addAll(list);
+        notifyDataSetChanged();
     }
 
     static class StudentViewHolder extends RecyclerView.ViewHolder {
