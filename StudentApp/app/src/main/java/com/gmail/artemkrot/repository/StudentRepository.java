@@ -29,10 +29,11 @@ public class StudentRepository {
         return instance;
     }
 
-    public void add(Student student) {
+    public Student add(Student student) {
         id++;
         student.setId(id);
         students.add(student);
+        return student;
     }
 
     public Student findById(Long id) {
