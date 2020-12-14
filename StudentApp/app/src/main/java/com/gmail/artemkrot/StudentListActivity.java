@@ -2,6 +2,7 @@ package com.gmail.artemkrot;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,11 +18,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.gmail.artemkrot.repository.StudentRepository;
 
 public class StudentListActivity extends Activity {
+    public static final String APP_PREFERENCES_SEARCH_FILTER = "SEARCH_FILTER";
     private StudentRepository studentRepository = StudentRepository.getInstance();
     private EditText editText;
     private RecyclerView recyclerView;
     private StudentRecyclerViewAdapter adapter;
     private Button studentAddButton;
+    private SharedPreferences activityPreferences;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,6 +40,7 @@ public class StudentListActivity extends Activity {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         studentAddButton = (Button) findViewById(R.id.student_add_button);
         editText = (EditText) findViewById(R.id.edit_text_search);
+        activityPreferences = getPreferences(Activity.MODE_PRIVATE);
     }
 
     @Override
@@ -44,6 +48,22 @@ public class StudentListActivity extends Activity {
         super.onResume();
         adapter.clear();
         adapter.addAll(studentRepository.getAllSortByName());
+        if (activityPreferences.contains(APP_PREFERENCES_SEARCH_FILTER)) {
+            editText.setText(activityPreferences.getString(APP_PREFERENCES_SEARCH_FILTER, ""));
+        }
+        adapter.getFilter().filter(editText.getText().toString());
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveActivityPreferences();
+    }
+
+    protected void saveActivityPreferences() {
+        SharedPreferences.Editor editor = activityPreferences.edit();
+        editor.putString(APP_PREFERENCES_SEARCH_FILTER, editText.getText().toString());
+        editor.apply();
     }
 
     private void initAddListener() {
