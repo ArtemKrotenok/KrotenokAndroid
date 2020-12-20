@@ -1,6 +1,7 @@
 package com.gmail.artemkrot;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -40,7 +41,7 @@ public class StudentListActivity extends Activity {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         studentAddButton = (Button) findViewById(R.id.student_add_button);
         editText = (EditText) findViewById(R.id.edit_text_search);
-        activityPreferences = getPreferences(Activity.MODE_PRIVATE);
+        activityPreferences = getPreferences(Context.MODE_PRIVATE);
     }
 
     @Override
