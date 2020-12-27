@@ -16,7 +16,7 @@ import com.gmail.artemkrot.util.ValidUtil;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 
-public class StudentEditActivity extends Activity {
+public class StudentEditActivity extends Activity implements StudentDetailsFragment.OnSelectedListener {
     public static final String EDIT_STUDENT_ID = "edit_student_id";
     public static final long ADD_NEW_STUDENT = -1L;
     private static final long DEFAULT_VALUE_STUDENT_ID = 0L;
@@ -157,5 +157,10 @@ public class StudentEditActivity extends Activity {
         Toast toast = Toast.makeText(getApplicationContext(),
                 getString(R.string.text_message_uncorrected_age), Toast.LENGTH_SHORT);
         toast.show();
+    }
+
+    @Override
+    public void onFinishStudentDetailFragment() {
+        finish();
     }
 }
