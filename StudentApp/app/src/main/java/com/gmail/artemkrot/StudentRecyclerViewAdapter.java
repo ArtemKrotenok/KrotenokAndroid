@@ -20,7 +20,8 @@ import java.util.List;
 public class StudentRecyclerViewAdapter
         extends RecyclerView.Adapter<StudentRecyclerViewAdapter.StudentViewHolder>
         implements Filterable {
-    private List<Student> studentList;
+
+    private final List<Student> studentList;
     private List<Student> filteredStudentList;
     private OnStudentClickListener onStudentClickListener;
 

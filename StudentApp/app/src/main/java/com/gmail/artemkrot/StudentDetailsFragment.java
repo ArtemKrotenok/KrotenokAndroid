@@ -1,6 +1,5 @@
 package com.gmail.artemkrot;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,44 +13,37 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.gmail.artemkrot.repository.StudentRepository;
 import com.gmail.artemkrot.repository.model.Student;
 import com.squareup.picasso.Picasso;
 
 public class StudentDetailsFragment extends Fragment {
-    public static final String DETAILS_STUDENT_ID = "details_student_id";
     public static final long DEFAULT_VALUE_STUDENT_ID = 0L;
+
+    private final StudentRepository studentRepository = StudentRepository.getInstance();
+    private OnStudentDetailsListener selectedListener;
+
+    private long studentId;
     private Button buttonEditStudent;
     private Button buttonDeleteStudent;
     private TextView textViewStudentName;
     private TextView textViewStudentAge;
     private ImageView imageViewStudent;
-    private StudentRepository studentRepository = StudentRepository.getInstance();
-    private long studentId;
-    private Context context;
-    private OnSelectedListener selectedListener;
 
     public static StudentDetailsFragment newInstance(long detailsStudentId) {
         StudentDetailsFragment studentDetailsFragment = new StudentDetailsFragment();
         Bundle bundle = new Bundle();
-        bundle.putLong(DETAILS_STUDENT_ID, detailsStudentId);
+        bundle.putLong(StudentDetailsActivity.DETAILS_STUDENT_ID, detailsStudentId);
         studentDetailsFragment.setArguments(bundle);
         return studentDetailsFragment;
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        selectedListener = (OnSelectedListener) context;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_student_details, container, false);
-        context = container.getContext();
-        return rootView;
+        return inflater.inflate(R.layout.fragment_student_details, container, false);
     }
 
     @Override
@@ -61,13 +53,22 @@ public class StudentDetailsFragment extends Fragment {
         setValue();
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        FragmentActivity fragmentActivity = getActivity();
+        if (fragmentActivity instanceof OnStudentDetailsListener) {
+            selectedListener = (OnStudentDetailsListener) fragmentActivity;
+        } else throw new IllegalArgumentException("not implement interface");
+    }
+
     private void initVerbals(View view) {
         imageViewStudent = (ImageView) view.findViewById(R.id.image_view_student_details);
         textViewStudentName = (TextView) view.findViewById(R.id.text_view_student_name_details);
         textViewStudentAge = (TextView) view.findViewById(R.id.text_view_student_age_details);
         buttonEditStudent = (Button) view.findViewById(R.id.button_student_edit);
         buttonDeleteStudent = (Button) view.findViewById(R.id.button_student_delete);
-        studentId = getArguments().getLong(DETAILS_STUDENT_ID);
+        studentId = getArguments().getLong(StudentDetailsActivity.DETAILS_STUDENT_ID);
     }
 
     private void setValue() {
@@ -77,7 +78,7 @@ public class StudentDetailsFragment extends Fragment {
                     getString(R.string.text_message_student_not_found),
                     Toast.LENGTH_SHORT);
             toast.show();
-            textViewStudentName.setText("Student not selected");
+            textViewStudentName.setText(getString(R.string.text_message_student_not_selected));
             textViewStudentAge.setText("");
             imageViewStudent.setImageDrawable(null);
         } else {
@@ -121,14 +122,5 @@ public class StudentDetailsFragment extends Fragment {
                 Toast.LENGTH_SHORT);
         toast.show();
         selectedListener.onFinishStudentDetailFragment();
-    }
-
-    public void update(long studentId) {
-        this.studentId = studentId;
-        setValue();
-    }
-
-    public interface OnSelectedListener {
-        void onFinishStudentDetailFragment();
     }
 }

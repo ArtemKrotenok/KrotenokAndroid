@@ -1,70 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/edit_text_image_url"
-        style="@android:style/Widget.DeviceDefault.EditText"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/edit_text_height"
-        android:layout_marginStart="@dimen/edit_text_margin_start"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="@dimen/edit_text_margin_end"
-        android:layout_marginBottom="@dimen/edit_text_margin_bottom"
-        android:background="@drawable/edit_text_style"
-        android:ems="10"
-        android:hint="@string/edit_text_hint_image_url"
-        android:inputType="text"
-        android:paddingLeft="@dimen/edit_text_padding"
-        android:textSize="@dimen/edit_text_size_text" />
-
-    <EditText
-        android:id="@+id/edit_text_name"
-        style="@android:style/Widget.DeviceDefault.EditText"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/edit_text_height"
-        android:layout_marginStart="@dimen/edit_text_margin_start"
-        android:layout_marginTop="@dimen/edit_text_margin_top"
-        android:layout_marginEnd="@dimen/edit_text_margin_end"
-        android:layout_marginBottom="@dimen/edit_text_margin_bottom"
-        android:background="@drawable/edit_text_style"
-        android:ems="10"
-        android:hint="@string/edit_text_hint_name"
-        android:inputType="text"
-        android:paddingLeft="@dimen/edit_text_padding"
-        android:textSize="@dimen/edit_text_size_text" />
-
-    <EditText
-        android:id="@+id/edit_text_age"
-        style="@android:style/Widget.DeviceDefault.EditText"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/edit_text_height"
-        android:layout_marginStart="@dimen/edit_text_margin_start"
-        android:layout_marginTop="@dimen/edit_text_margin_top"
-        android:layout_marginEnd="@dimen/edit_text_margin_end"
-        android:layout_marginBottom="@dimen/edit_text_margin_bottom"
-        android:background="@drawable/edit_text_style"
-        android:ems="10"
-        android:hint="@string/edit_text_hint_age"
-        android:inputType="number"
-        android:paddingLeft="@dimen/edit_text_padding"
-        android:textSize="@dimen/edit_text_size_text" />
-
     <LinearLayout
+        android:id="@+id/linear_layout_student_edit"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/bottom_content"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/edit_text_margin_start"
+        android:layout_marginEnd="@dimen/edit_text_margin_end"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/edit_text_image"
+            style="@android:style/Widget.DeviceDefault.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_text_height"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/edit_text_style"
+            android:ems="10"
+            android:hint="@string/edit_text_hint_image_url"
+            android:inputType="text"
+            android:paddingStart="@dimen/padding_start"
+            android:paddingEnd="@dimen/padding_end"
+            android:textSize="@dimen/edit_text_size_text" />
+
+        <EditText
+            android:id="@+id/edit_text_name"
+            style="@android:style/Widget.DeviceDefault.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_text_height"
+            android:layout_marginTop="@dimen/edit_text_margin_top"
+            android:background="@drawable/edit_text_style"
+            android:ems="10"
+            android:hint="@string/edit_text_hint_name"
+            android:inputType="text"
+            android:paddingStart="@dimen/padding_start"
+            android:paddingEnd="@dimen/padding_end"
+            android:textSize="@dimen/edit_text_size_text" />
+
+        <EditText
+            android:id="@+id/edit_text_age"
+            style="@android:style/Widget.DeviceDefault.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_text_height"
+            android:layout_marginTop="@dimen/edit_text_margin_top"
+            android:background="@drawable/edit_text_style"
+            android:ems="10"
+            android:hint="@string/edit_text_hint_age"
+            android:inputType="number"
+            android:paddingStart="@dimen/padding_start"
+            android:paddingEnd="@dimen/padding_end"
+            android:textSize="@dimen/edit_text_size_text" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/student_save_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
+            android:layout_gravity="center|bottom"
+            android:layout_marginTop="@dimen/edit_text_margin_top"
             android:text="@string/button_text_save"
             android:textSize="@dimen/button_size_text" />
     </LinearLayout>
-</LinearLayout>
+</ScrollView>
