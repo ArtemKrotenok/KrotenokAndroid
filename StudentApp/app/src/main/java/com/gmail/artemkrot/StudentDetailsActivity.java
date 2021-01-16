@@ -9,14 +9,21 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 public class StudentDetailsActivity extends FragmentActivity implements OnStudentDetailsListener {
-    public static final String DETAILS_STUDENT_ID = "DETAILS_STUDENT_ID";
+    private static final String DETAILS_STUDENT_ID = "DETAILS_STUDENT_ID";
+    private static final long DEFAULT_VALUE_STUDENT_ID = 0L;
+
+    public static void start(Context context, long studentId) {
+        Intent intent = new Intent(context, StudentDetailsActivity.class);
+        intent.putExtra(StudentDetailsActivity.DETAILS_STUDENT_ID, studentId);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_details);
         long studentId = getIntent().getLongExtra(StudentDetailsActivity.DETAILS_STUDENT_ID,
-                StudentDetailsFragment.DEFAULT_VALUE_STUDENT_ID);
+                DEFAULT_VALUE_STUDENT_ID);
         if (savedInstanceState == null) {
             initFragment(studentId);
         }
@@ -25,12 +32,6 @@ public class StudentDetailsActivity extends FragmentActivity implements OnStuden
     @Override
     public void onFinishStudentDetailFragment() {
         finish();
-    }
-
-    public static void start(Context context, long studentId) {
-        Intent intent = new Intent(context, StudentDetailsActivity.class);
-        intent.putExtra(StudentDetailsActivity.DETAILS_STUDENT_ID, studentId);
-        context.startActivity(intent);
     }
 
     private void initFragment(long studentId) {

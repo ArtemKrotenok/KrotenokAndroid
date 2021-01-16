@@ -19,7 +19,7 @@ public class StudentListActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_list);
         isLand = findViewById(R.id.fragment_student_details_placeholder) != null;
-        if (savedInstanceState == null) {
+        if (savedInstanceState == null || isLand) {
             initFragments();
         }
     }

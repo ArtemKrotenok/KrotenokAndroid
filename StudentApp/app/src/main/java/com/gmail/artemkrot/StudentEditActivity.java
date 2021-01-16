@@ -31,18 +31,18 @@ public class StudentEditActivity extends Activity {
     private EditText editTextAge;
     private long studentId;
 
+    public static void start(Context context, long studentId) {
+        Intent intent = new Intent(context, StudentEditActivity.class);
+        intent.putExtra(StudentEditActivity.EDIT_STUDENT_ID, studentId);
+        context.startActivity(intent);
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_edit);
         initButtonSaveStudent();
         initVerbals();
-    }
-
-    public static void start(Context context, long addNewStudent) {
-        Intent intent = new Intent(context, StudentEditActivity.class);
-        intent.putExtra(StudentEditActivity.EDIT_STUDENT_ID, StudentEditActivity.ADD_NEW_STUDENT);
-        context.startActivity(intent);
     }
 
     private void initVerbals() {

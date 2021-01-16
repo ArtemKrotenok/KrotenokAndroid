@@ -20,7 +20,7 @@ import com.gmail.artemkrot.repository.model.Student;
 import com.squareup.picasso.Picasso;
 
 public class StudentDetailsFragment extends Fragment {
-    public static final long DEFAULT_VALUE_STUDENT_ID = 0L;
+    private static final String DETAILS_STUDENT_ID = "DETAILS_STUDENT_ID";
 
     private final StudentRepository studentRepository = StudentRepository.getInstance();
     private OnStudentDetailsListener selectedListener;
@@ -35,7 +35,7 @@ public class StudentDetailsFragment extends Fragment {
     public static StudentDetailsFragment newInstance(long detailsStudentId) {
         StudentDetailsFragment studentDetailsFragment = new StudentDetailsFragment();
         Bundle bundle = new Bundle();
-        bundle.putLong(StudentDetailsActivity.DETAILS_STUDENT_ID, detailsStudentId);
+        bundle.putLong(DETAILS_STUDENT_ID, detailsStudentId);
         studentDetailsFragment.setArguments(bundle);
         return studentDetailsFragment;
     }
@@ -68,7 +68,7 @@ public class StudentDetailsFragment extends Fragment {
         textViewStudentAge = (TextView) view.findViewById(R.id.text_view_student_age_details);
         buttonEditStudent = (Button) view.findViewById(R.id.button_student_edit);
         buttonDeleteStudent = (Button) view.findViewById(R.id.button_student_delete);
-        studentId = getArguments().getLong(StudentDetailsActivity.DETAILS_STUDENT_ID);
+        studentId = getArguments().getLong(DETAILS_STUDENT_ID);
     }
 
     private void setValue() {
@@ -110,9 +110,7 @@ public class StudentDetailsFragment extends Fragment {
     }
 
     private void handleEditOnClick() {
-        Intent intent = new Intent(getActivity(), StudentEditActivity.class);
-        intent.putExtra(StudentEditActivity.EDIT_STUDENT_ID, studentId);
-        startActivity(intent);
+        StudentEditActivity.start(getContext(),studentId);
     }
 
     private void handleDeleteOnClick() {
