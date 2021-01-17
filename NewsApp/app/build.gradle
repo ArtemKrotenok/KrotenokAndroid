@@ -6,10 +6,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        // TODO It is forbidden publish this app on Google play,
-        //  if you want publish it, please change applicationId to your own
-        //  and use your own API url.
-        applicationId "put.your.domain.here"
+        applicationId "com.kiparo.news"
         minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
@@ -25,7 +22,7 @@ android {
 }
 
 dependencies {
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.google.code.gson:gson:2.8.6'

@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements Callback {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("ENTER API URL"); // FIXME Enter valid url!!!
+                    URL url = new URL("https://api.nytimes.com/svc/topstories/v2/technology.json?api-key=Sijmje9kSWcErLObvGcoazyI77TGe0ss");
                     HttpURLConnection con = (HttpURLConnection) url.openConnection();
                     String readStream = readStream(con.getInputStream());
                     callback.onResult(readStream);
@@ -112,9 +112,11 @@ public class MainActivity extends AppCompatActivity implements Callback {
                 NewsListAdapter adapter = new NewsListAdapter(newsItemList, new NewsListAdapter.OnClickListener() {
                     @Override
                     public void onItemClick(NewsEntity newsEntity) {
-                        String title = newsEntity.getTitle();
                         Intent intent = new Intent(MainActivity.this, DetailViewActivity.class);
-                        intent.putExtra("title", title);
+                        intent.putExtra("title", newsEntity.getTitle());
+                        intent.putExtra("summary", newsEntity.getSummary());
+                        intent.putExtra("imageURL", newsEntity.getMediaEntity().get(0).getUrl());
+                        intent.putExtra("storyURL", newsEntity.getArticleUrl());
                         startActivity(intent);
                     }
                 });
