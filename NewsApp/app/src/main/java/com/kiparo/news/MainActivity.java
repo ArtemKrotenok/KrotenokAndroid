@@ -1,10 +1,6 @@
 package com.kiparo.news;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -14,36 +10,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements Callback {
+public class MainActivity extends AppCompatActivity implements NewsLoadListener {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
-    public static final String URL_DATA_REQUEST = "https://api.nytimes.com/svc/topstories/v2/technology.json?api-key=Sijmje9kSWcErLObvGcoazyI77TGe0ss";
+    private static final String URL_DATA_REQUEST = "https://api.nytimes.com/svc/topstories/v2/technology.json?api-key=Sijmje9kSWcErLObvGcoazyI77TGe0ss";
 
-    private List<NewsEntity> newsItemList;
-    private Handler handler = new Handler(Looper.getMainLooper());
+    private List<NewsEntity> newsItemList = new ArrayList<>();
+
     private RecyclerView recyclerView;
+    private NewsListAdapter adapter;
+    private NewsLoader newsLoader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Fresco.initialize(this);
-        recyclerView = findViewById(R.id.list);
-        newsItemList = new ArrayList<>();
-        loadResource(this);
+        initVerbals();
     }
 
     @Override
@@ -61,69 +45,25 @@ public class MainActivity extends AppCompatActivity implements Callback {
         return super.onOptionsItemSelected(item);
     }
 
-    private void loadResource(final Callback callback) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    URL url = new URL(URL_DATA_REQUEST);
-                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                    String readStream = readStream(con.getInputStream());
-                    callback.onResult(readStream);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
-
-    private static String readStream(InputStream in) {
-        StringBuilder sb = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
-
-            String nextLine = "";
-            while ((nextLine = reader.readLine()) != null) {
-                sb.append(nextLine);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return sb.toString();
-    }
-
     @Override
-    public void onResult(final String data) {
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                JSONObject jsonObject;
-
-                try {
-                    jsonObject = new JSONObject(data);
-                    JSONArray resultArray = jsonObject.getJSONArray("results");
-                    for (int i = 0; i < resultArray.length(); i++) {
-                        JSONObject newsObject = resultArray.getJSONObject(i);
-                        NewsEntity newsEntity = NewsService.getNewsFromJSON(newsObject);
-                        newsItemList.add(newsEntity);
-                    }
-                } catch (JSONException e) {
-                    Log.e(TAG, "fail to parse json string");
-                }
-
-                NewsListAdapter adapter = new NewsListAdapter(newsItemList, new NewsListAdapter.OnClickListener() {
-                    @Override
-                    public void onItemClick(NewsEntity newsEntity) {
-                        Intent intent = new Intent(MainActivity.this, DetailViewActivity.class);
-                        intent.putExtra("title", newsEntity.getTitle());
-                        intent.putExtra("summary", newsEntity.getSummary());
-                        intent.putExtra("imageURL", newsEntity.getMediaEntityList().get(0).getUrl());
-                        intent.putExtra("storyURL", newsEntity.getStoryURL());
-                        startActivity(intent);
-                    }
-                });
-                recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-                recyclerView.setAdapter(adapter);
-            }
-        }, 0);
+    public void onFinishLoad() {
+        adapter.update(newsLoader.getNews());
+        adapter.notifyDataSetChanged();
     }
+
+    private void initVerbals() {
+        Fresco.initialize(this);
+        recyclerView = findViewById(R.id.list);
+        adapter = new NewsListAdapter(newsItemList, new NewsListAdapter.OnClickListener() {
+            @Override
+            public void onItemClick(NewsEntity newsEntity) {
+                DetailViewActivity.start(MainActivity.this, newsEntity);
+            }
+        });
+        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+        recyclerView.setAdapter(adapter);
+        newsLoader = new NewsLoader(URL_DATA_REQUEST, this);
+        newsLoader.loadNews();
+    }
+
 }

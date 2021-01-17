@@ -5,8 +5,10 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MediaService {
-    private static final String TAG = MediaService.class.getSimpleName();
+import java.util.List;
+
+public class MediaUtil {
+    private static final String TAG = MediaUtil.class.getSimpleName();
 
     public static MediaEntity getMediaFromJSON(JSONObject jsonObject) {
         MediaEntity mediaEntity = new MediaEntity();
@@ -23,5 +25,14 @@ public class MediaService {
             Log.e(TAG, exception.getMessage());
         }
         return mediaEntity;
+    }
+
+    public static MediaEntity getMediaByFormat(List<MediaEntity> mediaEntityList, Object formatMedia) {
+        for (MediaEntity mediaEntity : mediaEntityList) {
+            if (mediaEntity.getFormat().equals(formatMedia)) {
+                return mediaEntity;
+            }
+        }
+        return null;
     }
 }

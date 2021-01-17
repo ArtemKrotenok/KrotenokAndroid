@@ -1,5 +1,7 @@
 package com.kiparo.news;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -9,8 +11,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewsService {
-    private static final String TAG = NewsService.class.getSimpleName();
+public class NewsUtil {
+    private static final String TAG = NewsUtil.class.getSimpleName();
+    private final Handler handler = new Handler(Looper.getMainLooper());
+    private List<NewsEntity> newsItemList = new ArrayList<>();
 
     public static NewsEntity getNewsFromJSON(JSONObject jsonObject) {
         NewsEntity newsEntity = new NewsEntity();
@@ -24,7 +28,7 @@ public class NewsService {
             JSONArray mediaArray = jsonObject.getJSONArray("multimedia");
             for (int i = 0; i < mediaArray.length(); i++) {
                 JSONObject mediaObject = mediaArray.getJSONObject(i);
-                MediaEntity mediaEntity = MediaService.getMediaFromJSON(mediaObject);
+                MediaEntity mediaEntity = MediaUtil.getMediaFromJSON(mediaObject);
                 mediaEntityList.add(mediaEntity);
             }
             newsEntity.setMediaEntityList(mediaEntityList);

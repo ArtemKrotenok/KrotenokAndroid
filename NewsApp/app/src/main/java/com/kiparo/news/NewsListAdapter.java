@@ -18,6 +18,8 @@ import java.util.List;
 
 public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsListHolder> {
 
+    private static final String FORMAT_MEDIA = "Standard Thumbnail";
+
     private List<NewsEntity> newsItemList;
     private OnClickListener onClickListener;
 
@@ -42,16 +44,14 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsLi
         final NewsEntity newsEntity = newsItemList.get(position);
         List<MediaEntity> mediaEntityList = newsEntity.getMediaEntityList();
         String thumbnailURL = "";
-        MediaEntity mediaEntity = mediaEntityList.get(0);
+        MediaEntity mediaEntity = MediaUtil.getMediaByFormat(newsEntity.getMediaEntityList(), FORMAT_MEDIA);
         thumbnailURL = mediaEntity.getUrl();
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onClickListener.onItemClick(newsEntity);
             }
         });
-
         holder.newsTitle.setText(newsEntity.getTitle());
         DraweeController draweeController = Fresco.newDraweeControllerBuilder().setImageRequest(ImageRequest.fromUri
                 (Uri.parse(thumbnailURL))).setOldController(holder.imageView.getController()).build();
@@ -61,6 +61,12 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsLi
     @Override
     public int getItemCount() {
         return newsItemList.size();
+    }
+
+    public void update(List<NewsEntity> list) {
+        newsItemList.clear();
+        newsItemList.addAll(list);
+        notifyDataSetChanged();
     }
 
     static class NewsListHolder extends RecyclerView.ViewHolder {

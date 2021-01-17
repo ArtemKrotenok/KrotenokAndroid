@@ -1,6 +1,7 @@
 package com.kiparo.news;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,26 +14,40 @@ import com.facebook.drawee.view.DraweeView;
 import com.facebook.imagepipeline.request.ImageRequest;
 
 public class DetailViewActivity extends Activity {
-    private String storyURL = "";
+
+    private static final String DEFAULT_STORY_URL = "";
+    private static final String TAG_NAME_TITLE = "title";
+    private static final String TAG_NAME_SUMMARY = "summary";
+    private static final String TAG_NAME_IMAGE_URL = "imageURL";
+    private static final String TAG_NAME_STORY_URL = "storyURL";
+    private static final String FORMAT_MEDIA = "superJumbo";
+
+    private String storyURL = DEFAULT_STORY_URL;
+
+    public static void start(Context context, NewsEntity newsEntity) {
+        Intent intent = new Intent(context, DetailViewActivity.class);
+        intent.putExtra(TAG_NAME_TITLE, newsEntity.getTitle());
+        intent.putExtra(TAG_NAME_SUMMARY, newsEntity.getSummary());
+        intent.putExtra(TAG_NAME_IMAGE_URL,
+                MediaUtil.getMediaByFormat(newsEntity.getMediaEntityList(), FORMAT_MEDIA).getUrl());
+        intent.putExtra(TAG_NAME_STORY_URL, newsEntity.getStoryURL());
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-
         Bundle extras = getIntent().getExtras();
-        storyURL = extras.getString("storyURL");
-        String title = extras.getString("title");
-        String summary = extras.getString("summary");
-        String imageURL = extras.getString("imageURL");
-
+        storyURL = extras.getString(TAG_NAME_STORY_URL);
+        String title = extras.getString(TAG_NAME_TITLE);
+        String summary = extras.getString(TAG_NAME_SUMMARY);
+        String imageURL = extras.getString(TAG_NAME_IMAGE_URL);
         TextView titleView = (TextView) findViewById(R.id.title);
         DraweeView imageView = (DraweeView) findViewById(R.id.news_image);
         TextView summaryView = (TextView) findViewById(R.id.summary_content);
-
         titleView.setText(title);
         summaryView.setText(summary);
-
         DraweeController draweeController = Fresco.newDraweeControllerBuilder()
                 .setImageRequest(ImageRequest.fromUri(Uri.parse(imageURL)))
                 .setOldController(imageView.getController()).build();
@@ -44,4 +59,5 @@ public class DetailViewActivity extends Activity {
         intent.setData(Uri.parse(storyURL));
         startActivity(intent);
     }
+
 }
