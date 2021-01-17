@@ -30,6 +30,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements Callback {
 
     private static final String TAG = MainActivity.class.getSimpleName();
+    public static final String URL_DATA_REQUEST = "https://api.nytimes.com/svc/topstories/v2/technology.json?api-key=Sijmje9kSWcErLObvGcoazyI77TGe0ss";
 
     private List<NewsEntity> newsItemList;
     private Handler handler = new Handler(Looper.getMainLooper());
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements Callback {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("https://api.nytimes.com/svc/topstories/v2/technology.json?api-key=Sijmje9kSWcErLObvGcoazyI77TGe0ss");
+                    URL url = new URL(URL_DATA_REQUEST);
                     HttpURLConnection con = (HttpURLConnection) url.openConnection();
                     String readStream = readStream(con.getInputStream());
                     callback.onResult(readStream);
@@ -102,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements Callback {
                     JSONArray resultArray = jsonObject.getJSONArray("results");
                     for (int i = 0; i < resultArray.length(); i++) {
                         JSONObject newsObject = resultArray.getJSONObject(i);
-                        NewsEntity newsEntity = new NewsEntity(newsObject);
+                        NewsEntity newsEntity = NewsService.getNewsFromJSON(newsObject);
                         newsItemList.add(newsEntity);
                     }
                 } catch (JSONException e) {
@@ -115,8 +116,8 @@ public class MainActivity extends AppCompatActivity implements Callback {
                         Intent intent = new Intent(MainActivity.this, DetailViewActivity.class);
                         intent.putExtra("title", newsEntity.getTitle());
                         intent.putExtra("summary", newsEntity.getSummary());
-                        intent.putExtra("imageURL", newsEntity.getMediaEntity().get(0).getUrl());
-                        intent.putExtra("storyURL", newsEntity.getArticleUrl());
+                        intent.putExtra("imageURL", newsEntity.getMediaEntityList().get(0).getUrl());
+                        intent.putExtra("storyURL", newsEntity.getStoryURL());
                         startActivity(intent);
                     }
                 });

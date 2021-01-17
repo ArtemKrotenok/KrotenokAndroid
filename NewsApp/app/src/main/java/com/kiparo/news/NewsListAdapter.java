@@ -40,7 +40,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsLi
     public void onBindViewHolder(@NonNull NewsListHolder holder, int position) {
 
         final NewsEntity newsEntity = newsItemList.get(position);
-        List<MediaEntity> mediaEntityList = newsEntity.getMediaEntity();
+        List<MediaEntity> mediaEntityList = newsEntity.getMediaEntityList();
         String thumbnailURL = "";
         MediaEntity mediaEntity = mediaEntityList.get(0);
         thumbnailURL = mediaEntity.getUrl();

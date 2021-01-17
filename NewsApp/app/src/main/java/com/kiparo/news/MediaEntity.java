@@ -1,8 +1,5 @@
 package com.kiparo.news;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 public class MediaEntity {
 
     private String url;
@@ -14,46 +11,67 @@ public class MediaEntity {
     private String caption;
     private String copyright;
 
-    public MediaEntity(JSONObject jsonObject) throws JSONException {
-        url = jsonObject.getString("url");
-        format = jsonObject.getString("format");
-        height = jsonObject.getInt("height");
-        width = jsonObject.getInt("width");
-        type = jsonObject.getString("type");
-        subType = jsonObject.getString("subtype");
-        caption = jsonObject.getString("caption");
-        copyright = jsonObject.getString("copyright");
-    }
-
     public String getUrl() {
         return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getFormat() {
         return format;
     }
 
+    public void setFormat(String format) {
+        this.format = format;
+    }
+
     public int getHeight() {
         return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 
     public int getWidth() {
         return width;
     }
 
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
     public String getType() {
         return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getSubType() {
         return subType;
     }
 
+    public void setSubType(String subType) {
+        this.subType = subType;
+    }
+
     public String getCaption() {
         return caption;
     }
 
+    public void setCaption(String caption) {
+        this.caption = caption;
+    }
+
     public String getCopyright() {
         return copyright;
+    }
+
+    public void setCopyright(String copyright) {
+        this.copyright = copyright;
     }
 }

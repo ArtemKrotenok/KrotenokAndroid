@@ -1,65 +1,61 @@
 package com.kiparo.news;
 
-import android.util.Log;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class NewsEntity {
 
-    private static final String TAG = NewsEntity.class.getSimpleName();
-
     private String title;
     private String summary;
-    private String articleUrl;
+    private String storyURL;
     private String byline;
     private String publishedDate;
     private List<MediaEntity> mediaEntityList;
 
-    public NewsEntity(JSONObject jsonObject) {
-        try {
-            mediaEntityList = new ArrayList<>();
-            title = jsonObject.getString("title");
-            summary = jsonObject.getString("abstract");
-            articleUrl = jsonObject.getString("url");
-            byline = jsonObject.getString("byline");
-            publishedDate = jsonObject.getString("published_date");
-            JSONArray mediaArray = jsonObject.getJSONArray("multimedia");
-            for (int i = 0; i < mediaArray.length(); i++) {
-                JSONObject mediaObject = mediaArray.getJSONObject(i);
-                MediaEntity mediaEntity = new MediaEntity(mediaObject);
-                mediaEntityList.add(mediaEntity);
-            }
-        } catch (JSONException exception) {
-            Log.e(TAG, exception.getMessage());
-        }
-    }
-
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getSummary() {
         return summary;
     }
 
-    public String getArticleUrl() {
-        return articleUrl;
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public String getStoryURL() {
+        return storyURL;
+    }
+
+    public void setStoryURL(String storyURL) {
+        this.storyURL = storyURL;
     }
 
     public String getByline() {
         return byline;
     }
 
+    public void setByline(String byline) {
+        this.byline = byline;
+    }
+
     public String getPublishedDate() {
         return publishedDate;
     }
 
-    public List<MediaEntity> getMediaEntity() {
+    public void setPublishedDate(String publishedDate) {
+        this.publishedDate = publishedDate;
+    }
+
+    public List<MediaEntity> getMediaEntityList() {
         return mediaEntityList;
+    }
+
+    public void setMediaEntityList(List<MediaEntity> mediaEntityList) {
+        this.mediaEntityList = mediaEntityList;
     }
 }
