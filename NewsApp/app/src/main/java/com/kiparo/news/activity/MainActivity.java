@@ -1,14 +1,11 @@
 package com.kiparo.news.activity;
 
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
 import com.kiparo.news.R;
 import com.kiparo.news.repository.NewsEntity;
 import com.kiparo.news.servise.Constant;
@@ -21,7 +18,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements NewsLoadListener {
 
     private final List<NewsEntity> newsItemList = new ArrayList<>();
-
     private NewsListAdapter adapter;
     private NewsLoader newsLoader;
 

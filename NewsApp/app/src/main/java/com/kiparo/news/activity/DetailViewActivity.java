@@ -14,25 +14,21 @@ import com.facebook.drawee.view.DraweeView;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.kiparo.news.R;
 import com.kiparo.news.repository.NewsEntity;
-import com.kiparo.news.util.MediaUtil;
 
 public class DetailViewActivity extends Activity {
 
-    private static final String DEFAULT_STORY_URL = "";
     private static final String TAG_NAME_TITLE = "title";
     private static final String TAG_NAME_SUMMARY = "summary";
     private static final String TAG_NAME_IMAGE_URL = "imageURL";
     private static final String TAG_NAME_STORY_URL = "storyURL";
-    private static final String FORMAT_MEDIA = "superJumbo";
 
-    private String storyURL = DEFAULT_STORY_URL;
+    private String storyURL;
 
     public static void start(Context context, NewsEntity newsEntity) {
         Intent intent = new Intent(context, DetailViewActivity.class);
         intent.putExtra(TAG_NAME_TITLE, newsEntity.getTitle());
         intent.putExtra(TAG_NAME_SUMMARY, newsEntity.getSummary());
-        intent.putExtra(TAG_NAME_IMAGE_URL,
-                MediaUtil.getMediaByFormat(newsEntity.getMediaEntityList(), FORMAT_MEDIA).getUrl());
+        intent.putExtra(TAG_NAME_IMAGE_URL, newsEntity.getBigPictureURL());
         intent.putExtra(TAG_NAME_STORY_URL, newsEntity.getStoryURL());
         context.startActivity(intent);
     }

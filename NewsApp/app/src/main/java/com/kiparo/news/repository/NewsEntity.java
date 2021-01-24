@@ -1,15 +1,12 @@
 package com.kiparo.news.repository;
 
-import java.util.List;
-
 public class NewsEntity {
 
     private String title;
     private String summary;
     private String storyURL;
-    private String byline;
-    private String publishedDate;
-    private List<MediaEntity> mediaEntityList;
+    private String smallPictureURL;
+    private String bigPictureURL;
 
     public String getTitle() {
         return title;
@@ -35,27 +32,19 @@ public class NewsEntity {
         this.storyURL = storyURL;
     }
 
-    public String getByline() {
-        return byline;
+    public String getSmallPictureURL() {
+        return smallPictureURL;
     }
 
-    public void setByline(String byline) {
-        this.byline = byline;
+    public void setSmallPictureURL(String smallPictureURL) {
+        this.smallPictureURL = smallPictureURL;
     }
 
-    public String getPublishedDate() {
-        return publishedDate;
+    public String getBigPictureURL() {
+        return bigPictureURL;
     }
 
-    public void setPublishedDate(String publishedDate) {
-        this.publishedDate = publishedDate;
-    }
-
-    public List<MediaEntity> getMediaEntityList() {
-        return mediaEntityList;
-    }
-
-    public void setMediaEntityList(List<MediaEntity> mediaEntityList) {
-        this.mediaEntityList = mediaEntityList;
+    public void setBigPictureURL(String bigPictureURL) {
+        this.bigPictureURL = bigPictureURL;
     }
 }

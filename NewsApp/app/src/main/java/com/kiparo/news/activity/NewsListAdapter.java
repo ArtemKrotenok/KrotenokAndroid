@@ -14,18 +14,14 @@ import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.DraweeView;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.kiparo.news.R;
-import com.kiparo.news.repository.MediaEntity;
 import com.kiparo.news.repository.NewsEntity;
-import com.kiparo.news.util.MediaUtil;
 
 import java.util.List;
 
 public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsListHolder> {
 
-    private static final String FORMAT_MEDIA = "Standard Thumbnail";
-
-    private List<NewsEntity> newsItemList;
-    private OnClickListener onClickListener;
+    private final List<NewsEntity> newsItemList;
+    private final OnClickListener onClickListener;
 
     public NewsListAdapter(List<NewsEntity> newsItemList, OnClickListener onClickListener) {
         this.newsItemList = newsItemList;
@@ -46,9 +42,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsLi
     public void onBindViewHolder(@NonNull NewsListHolder holder, int position) {
 
         final NewsEntity newsEntity = newsItemList.get(position);
-        String thumbnailURL = "";
-        MediaEntity mediaEntity = MediaUtil.getMediaByFormat(newsEntity.getMediaEntityList(), FORMAT_MEDIA);
-        thumbnailURL = mediaEntity.getUrl();
+        String thumbnailURL = newsEntity.getSmallPictureURL();
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
