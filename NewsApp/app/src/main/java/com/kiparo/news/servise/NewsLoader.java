@@ -25,10 +25,9 @@ public class NewsLoader implements Callback {
 
     private static final String TAG = NewsLoader.class.getSimpleName();
     private final Handler handler = new Handler(Looper.getMainLooper());
-    private List<NewsEntity> newsItemList = new ArrayList<>();
-    private NewsListAdapter adapter;
-    private String urlDataRequest;
-    private NewsLoadListener newsLoadListener;
+    private final List<NewsEntity> newsItemList = new ArrayList<>();
+    private final String urlDataRequest;
+    private final NewsLoadListener newsLoadListener;
 
     public NewsLoader(String urlDataRequest, NewsLoadListener newsLoadListener) {
         this.urlDataRequest = urlDataRequest;
