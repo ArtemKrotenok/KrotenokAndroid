@@ -14,6 +14,7 @@ public class NewsLoader implements Callback {
     private final List<NewsEntity> newsItemList = new ArrayList<>();
     private final String urlDataRequest;
     private final NewsLoadListener newsLoadListener;
+    private Runnable load;
 
     public NewsLoader(String urlDataRequest, NewsLoadListener newsLoadListener) {
         this.urlDataRequest = urlDataRequest;
@@ -22,13 +23,20 @@ public class NewsLoader implements Callback {
 
     @Override
     public void onResult(final String data) {
-        handler.postDelayed(new Runnable() {
+        load = new Runnable() {
             @Override
             public void run() {
                 newsItemList.addAll(NewsParsingUtil.getNewsListFromJSONString(data));
                 newsLoadListener.onFinishLoad();
             }
-        }, 0);
+        };
+        handler.postDelayed(load, 0);
+    }
+
+    public void finish() {
+        if (load != null) {
+            handler.removeCallbacks(load);
+        }
     }
 
     public void loadNews() {

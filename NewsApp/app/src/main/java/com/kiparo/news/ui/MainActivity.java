@@ -30,6 +30,12 @@ public class MainActivity extends AppCompatActivity implements NewsLoadListener 
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        newsLoader.finish();
+    }
+
+    @Override
     public void onFinishLoad() {
         adapter.update(newsLoader.getNews());
     }
@@ -43,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements NewsLoadListener 
             }
         });
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+        recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
     }
 
