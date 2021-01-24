@@ -1,6 +1,7 @@
 package com.kiparo.news.ui;
 
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.facebook.drawee.view.DraweeView;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.kiparo.news.R;
 import com.kiparo.news.net.NewsEntity;
+import com.kiparo.news.net.NewsParsingUtil;
 
 import java.util.List;
 
@@ -22,6 +24,8 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsLi
 
     private final List<NewsEntity> newsItemList;
     private final OnClickListener onClickListener;
+
+    private static final String TAG = NewsListAdapter.class.getSimpleName();
 
     public NewsListAdapter(List<NewsEntity> newsItemList, OnClickListener onClickListener) {
         this.newsItemList = newsItemList;
@@ -50,9 +54,13 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsLi
             }
         });
         holder.newsTitle.setText(newsEntity.getTitle());
-        DraweeController draweeController = Fresco.newDraweeControllerBuilder().setImageRequest(ImageRequest.fromUri
-                (Uri.parse(thumbnailURL))).setOldController(holder.imageView.getController()).build();
-        holder.imageView.setController(draweeController);
+        try {
+            DraweeController draweeController = Fresco.newDraweeControllerBuilder().setImageRequest(ImageRequest.fromUri
+                    (Uri.parse(thumbnailURL))).setOldController(holder.imageView.getController()).build();
+            holder.imageView.setController(draweeController);
+        } catch (NullPointerException e) {
+            Log.e(TAG, "Error parse URL image");
+        }
     }
 
     @Override

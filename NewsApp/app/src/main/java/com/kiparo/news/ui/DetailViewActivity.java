@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -21,6 +22,8 @@ public class DetailViewActivity extends Activity {
     private static final String TAG_NAME_SUMMARY = "summary";
     private static final String TAG_NAME_IMAGE_URL = "imageURL";
     private static final String TAG_NAME_STORY_URL = "storyURL";
+
+    private static final String TAG = DetailViewActivity.class.getSimpleName();
 
     private String storyURL;
 
@@ -47,10 +50,15 @@ public class DetailViewActivity extends Activity {
         TextView summaryView = (TextView) findViewById(R.id.summary_content);
         titleView.setText(title);
         summaryView.setText(summary);
-        DraweeController draweeController = Fresco.newDraweeControllerBuilder()
-                .setImageRequest(ImageRequest.fromUri(Uri.parse(imageURL)))
-                .setOldController(imageView.getController()).build();
-        imageView.setController(draweeController);
+        try {
+            DraweeController draweeController = Fresco.newDraweeControllerBuilder()
+                    .setImageRequest(ImageRequest.fromUri(Uri.parse(imageURL)))
+                    .setOldController(imageView.getController()).build();
+            imageView.setController(draweeController);
+
+        } catch (NullPointerException e) {
+            Log.e(TAG, "Error parse URL image");
+        }
     }
 
     public void onFullStoryClicked(View view) {
@@ -58,5 +66,4 @@ public class DetailViewActivity extends Activity {
         intent.setData(Uri.parse(storyURL));
         startActivity(intent);
     }
-
 }
