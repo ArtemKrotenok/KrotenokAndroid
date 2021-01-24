@@ -1,6 +1,7 @@
 package com.gmail.artemkrot;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,17 +18,24 @@ import com.gmail.artemkrot.util.ValidUtil;
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 
 public class StudentEditActivity extends Activity {
-    public static final String EDIT_STUDENT_ID = "edit_student_id";
+    public static final String EDIT_STUDENT_ID = "EDIT_STUDENT_ID";
     public static final long ADD_NEW_STUDENT = -1L;
     private static final long DEFAULT_VALUE_STUDENT_ID = 0L;
     private static final int MIN_STUDENT_AGE = 18;
     private static final int MAX_STUDENT_AGE = 100;
-    private Button buttonSaveStudent;
+
+    private final StudentRepository studentRepository = StudentRepository.getInstance();
+
     private EditText editTextImageUrl;
     private EditText editTextName;
     private EditText editTextAge;
-    private StudentRepository studentRepository = StudentRepository.getInstance();
     private long studentId;
+
+    public static void start(Context context, long studentId) {
+        Intent intent = new Intent(context, StudentEditActivity.class);
+        intent.putExtra(StudentEditActivity.EDIT_STUDENT_ID, studentId);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,7 +46,7 @@ public class StudentEditActivity extends Activity {
     }
 
     private void initVerbals() {
-        editTextImageUrl = (EditText) findViewById(R.id.edit_text_image_url);
+        editTextImageUrl = (EditText) findViewById(R.id.edit_text_image);
         editTextName = (EditText) findViewById(R.id.edit_text_name);
         editTextAge = (EditText) findViewById(R.id.edit_text_age);
         studentId = getIntent().getLongExtra(EDIT_STUDENT_ID, DEFAULT_VALUE_STUDENT_ID);
@@ -55,7 +63,7 @@ public class StudentEditActivity extends Activity {
     }
 
     private void initButtonSaveStudent() {
-        buttonSaveStudent = (Button) findViewById(R.id.student_save_button);
+        Button buttonSaveStudent = (Button) findViewById(R.id.student_save_button);
         View.OnClickListener buttonSaveStudentOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,7 +116,7 @@ public class StudentEditActivity extends Activity {
     }
 
     private boolean ageValid() {
-        if (editTextAge.getText().toString().equals("")) {
+        if (editTextAge.getText().toString().length() == 0) {
             showEmptyField();
             return false;
         }
@@ -121,7 +129,7 @@ public class StudentEditActivity extends Activity {
     }
 
     private boolean nameValid() {
-        if (editTextName.getText().toString().equals("")) {
+        if (editTextName.getText().toString().length() == 0) {
             showEmptyField();
             return false;
         }
@@ -129,7 +137,7 @@ public class StudentEditActivity extends Activity {
     }
 
     private boolean imageUrlValid() {
-        if (editTextImageUrl.getText().toString().equals("")) {
+        if (editTextImageUrl.getText().toString().length() == 0) {
             showEmptyField();
             return false;
         }
@@ -158,4 +166,5 @@ public class StudentEditActivity extends Activity {
                 getString(R.string.text_message_uncorrected_age), Toast.LENGTH_SHORT);
         toast.show();
     }
+
 }

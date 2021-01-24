@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/image_view_student_details"
+            android:layout_width="@dimen/image_view_size_details"
+            android:layout_height="@dimen/image_view_size_details"
+            android:layout_gravity="center"
+            android:layout_marginTop="60dp" />
+
+        <TextView
+            android:id="@+id/text_view_student_name_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_view_margin_start_details"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_view_size_details" />
+
+        <TextView
+            android:id="@+id/text_view_student_age_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_view_margin_start_details"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_view_size_details" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/bottom_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_student_edit"
+                android:layout_width="@dimen/button_width"
+                android:layout_height="@dimen/button_height"
+                android:layout_gravity="bottom"
+                android:layout_marginEnd="30dp"
+                android:text="@string/button_text_edit"
+                android:textSize="@dimen/button_size_text" />
+
+            <Button
+                android:id="@+id/button_student_delete"
+                android:layout_width="@dimen/button_width"
+                android:layout_height="@dimen/button_height"
+                android:layout_gravity="bottom"
+                android:text="@string/button_text_delete"
+                android:textSize="@dimen/button_size_text" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

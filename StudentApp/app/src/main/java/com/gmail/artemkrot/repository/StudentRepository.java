@@ -10,8 +10,8 @@ import java.util.List;
 
 public class StudentRepository {
     private static final int COUNT_RANDOM_STUDENTS = 10;
-    private static StudentRepository instance;
-    private List<Student> students = new ArrayList<>();
+    private final static StudentRepository instance = new StudentRepository();
+    private final List<Student> students = new ArrayList<>();
     private long id = 0L;
 
     private StudentRepository() {
@@ -23,9 +23,6 @@ public class StudentRepository {
     }
 
     public static StudentRepository getInstance() {
-        if (instance == null) {
-            instance = new StudentRepository();
-        }
         return instance;
     }
 
@@ -57,13 +54,27 @@ public class StudentRepository {
     }
 
     public void delete(Long id) {
-        Student student = findById(id);
-        students.remove(student);
+        for (int i = 0; i < students.size(); i++) {
+            if (students.get(i).getId().equals(id)) {
+                students.remove(i);
+                break;
+            }
+        }
     }
 
     public void update(Student student) {
-        Student savedStudent = findById(student.getId());
-        students.remove(savedStudent);
-        students.add(student);
+        for (int i = 0; i < students.size(); i++) {
+            if (students.get(i).getId().equals(student.getId())) {
+                students.set(i, student);
+                break;
+            }
+        }
+    }
+
+    public long getFirstStudentId() {
+        if (!students.isEmpty()) {
+            return students.get(0).getId();
+        }
+        return -1;
     }
 }
