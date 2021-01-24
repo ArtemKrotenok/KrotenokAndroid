@@ -1,4 +1,4 @@
-package com.kiparo.news;
+package com.kiparo.news.activity;
 
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -13,6 +13,10 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.DraweeView;
 import com.facebook.imagepipeline.request.ImageRequest;
+import com.kiparo.news.R;
+import com.kiparo.news.repository.MediaEntity;
+import com.kiparo.news.repository.NewsEntity;
+import com.kiparo.news.util.MediaUtil;
 
 import java.util.List;
 

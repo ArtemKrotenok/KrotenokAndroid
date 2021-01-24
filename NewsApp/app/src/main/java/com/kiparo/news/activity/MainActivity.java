@@ -1,4 +1,4 @@
-package com.kiparo.news;
+package com.kiparo.news.activity;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,6 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.kiparo.news.R;
+import com.kiparo.news.repository.NewsEntity;
+import com.kiparo.news.servise.NewsLoadListener;
+import com.kiparo.news.servise.NewsLoader;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,8 +1,11 @@
-package com.kiparo.news;
+package com.kiparo.news.util;
 
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+
+import com.kiparo.news.repository.MediaEntity;
+import com.kiparo.news.repository.NewsEntity;
 
 import org.json.JSONArray;
 import org.json.JSONException;

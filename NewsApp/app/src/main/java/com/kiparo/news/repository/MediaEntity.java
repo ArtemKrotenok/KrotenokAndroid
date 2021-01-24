@@ -1,4 +1,4 @@
-package com.kiparo.news;
+package com.kiparo.news.repository;
 
 public class MediaEntity {
 

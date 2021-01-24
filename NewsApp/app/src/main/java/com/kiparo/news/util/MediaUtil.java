@@ -1,6 +1,8 @@
-package com.kiparo.news;
+package com.kiparo.news.util;
 
 import android.util.Log;
+
+import com.kiparo.news.repository.MediaEntity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
