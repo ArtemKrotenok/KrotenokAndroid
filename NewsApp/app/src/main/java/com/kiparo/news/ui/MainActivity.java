@@ -1,4 +1,4 @@
-package com.kiparo.news.activity;
+package com.kiparo.news.ui;
 
 import android.os.Bundle;
 
@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kiparo.news.R;
-import com.kiparo.news.repository.NewsEntity;
-import com.kiparo.news.servise.Constant;
-import com.kiparo.news.servise.NewsLoadListener;
-import com.kiparo.news.servise.NewsLoader;
+import com.kiparo.news.net.NewsEntity;
+import com.kiparo.news.net.Constant;
+import com.kiparo.news.net.NewsLoadListener;
+import com.kiparo.news.net.NewsLoader;
 
 import java.util.ArrayList;
 import java.util.List;

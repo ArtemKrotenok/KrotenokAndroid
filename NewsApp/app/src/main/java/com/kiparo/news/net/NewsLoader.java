@@ -1,10 +1,7 @@
-package com.kiparo.news.servise;
+package com.kiparo.news.net;
 
 import android.os.Handler;
 import android.os.Looper;
-
-import com.kiparo.news.repository.NewsEntity;
-import com.kiparo.news.util.NewsParsingUtil;
 
 import java.net.HttpURLConnection;
 import java.net.URL;

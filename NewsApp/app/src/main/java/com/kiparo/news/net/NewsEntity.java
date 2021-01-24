@@ -1,4 +1,4 @@
-package com.kiparo.news.repository;
+package com.kiparo.news.net;
 
 public class NewsEntity {
 

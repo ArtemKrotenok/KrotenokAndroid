@@ -1,4 +1,4 @@
-package com.kiparo.news.servise;
+package com.kiparo.news.net;
 
 public interface NewsLoadListener {
     void onFinishLoad();
