@@ -1,9 +1,0 @@
-<resources>
-    <string name="app_name">Coronavirus</string>
-    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyC8VZv3Julm6eKTAcWT0TXcCesFHiEUoqQ</string>
-    <string name="no_data_text">no data</string>
-    <string name="text_confirmed">confirmed</string>
-    <string name="text_deaths">deaths</string>
-    <string name="text_recovered">recovered</string>
-    <string name="text_message_data_was_update">Data was update</string>
-</resources>
