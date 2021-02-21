@@ -19,7 +19,9 @@ import com.gmail.artemkrot.coronavirus.repository.InfectionCountry;
 
 import java.util.ArrayList;
 
-public class InfoFragment extends Fragment {
+import static com.gmail.artemkrot.coronavirus.ui.TextFormatUtil.formattedNumber;
+
+public class InfoFragment extends Fragment implements ViewUpdate {
 
     private CoronaVirusDataEntity coronaVirusData;
     private CountriesItemAdapter adapter;
@@ -45,6 +47,7 @@ public class InfoFragment extends Fragment {
         }
     }
 
+    @Override
     public void updateData() {
         setData();
     }
@@ -53,9 +56,9 @@ public class InfoFragment extends Fragment {
         coronaVirusData = coronaVirusDataRepository.getCoronaVirusData();
         adapter.update(coronaVirusData.getInfectionCountryList());
         lastCheckTimeText.setText("last update " + coronaVirusData.getLastCheckTimeText());
-        totalConfirmed.setText(coronaVirusData.getTotalConfirmed());
-        totalDeaths.setText(coronaVirusData.getTotalDeaths());
-        totalRecovered.setText(coronaVirusData.getTotalRecovered());
+        totalConfirmed.setText(formattedNumber(coronaVirusData.getTotalConfirmed()));
+        totalDeaths.setText(formattedNumber(coronaVirusData.getTotalDeaths()));
+        totalRecovered.setText(formattedNumber(coronaVirusData.getTotalRecovered()));
     }
 
     private void initVerbals(View view) {

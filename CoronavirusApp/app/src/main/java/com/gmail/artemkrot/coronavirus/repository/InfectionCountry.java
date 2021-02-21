@@ -2,7 +2,7 @@ package com.gmail.artemkrot.coronavirus.repository;
 
 public class InfectionCountry {
     private String name;
-    private String confirmed;
+    private long confirmed;
 
     public String getName() {
         return name;
@@ -12,11 +12,11 @@ public class InfectionCountry {
         this.name = name;
     }
 
-    public String getConfirmed() {
+    public long getConfirmed() {
         return confirmed;
     }
 
-    public void setConfirmed(String confirmed) {
+    public void setConfirmed(long confirmed) {
         this.confirmed = confirmed;
     }
 }

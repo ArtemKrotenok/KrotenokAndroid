@@ -20,13 +20,24 @@ public class MainActivity extends FragmentActivity implements DataLoadListener {
     private MapFragment mapFragment;
     private DataLoader dataLoader;
 
+    private ViewUpdate infoPage;
+    private ViewUpdate mapPage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (savedInstanceState == null) {
+            initFragments();
+        }
         initVerbals();
         startInfoFragment();
         loadData();
+    }
+
+    private void initFragments() {
+        mapFragment = new MapFragment();
+        infoFragment = new InfoFragment();
     }
 
     @Override
@@ -38,11 +49,19 @@ public class MainActivity extends FragmentActivity implements DataLoadListener {
     @Override
     public void onFinishLoad() {
         updateData();
+        Toast toast = Toast.makeText(getApplicationContext(),
+                getString(R.string.text_message_data_was_update), Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
+    private void updateData() {
+        mapPage.updateData();
+        infoPage.updateData();
     }
 
     private void initVerbals() {
-        mapFragment = new MapFragment();
-        infoFragment = new InfoFragment();
+        mapPage = mapFragment;
+        infoPage = infoFragment;
         bottomNavigationView = findViewById(R.id.bottom_navigation_view);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -52,10 +71,7 @@ public class MainActivity extends FragmentActivity implements DataLoadListener {
                         startInfoFragment();
                         break;
                     case R.id.action_two:
-                        updateData();
-                        Toast toast = Toast.makeText(getApplicationContext(),
-                                getString(R.string.text_message_data_was_update), Toast.LENGTH_SHORT);
-                        toast.show();
+                        loadData();
                         break;
                     case R.id.action_three:
                         startMapFragment();
@@ -64,13 +80,6 @@ public class MainActivity extends FragmentActivity implements DataLoadListener {
                 return true;
             }
         });
-    }
-
-    private void updateData() {
-        infoFragment.updateData();
-        if (mapFragment.isReady()) {
-            mapFragment.updateData();
-        }
     }
 
     private void startInfoFragment() {
@@ -84,7 +93,6 @@ public class MainActivity extends FragmentActivity implements DataLoadListener {
         fragmentTransaction.replace(R.id.fragment_placeholder, mapFragment);
         fragmentTransaction.commit();
     }
-
 
     private void loadData() {
         dataLoader = new DataLoader(this);

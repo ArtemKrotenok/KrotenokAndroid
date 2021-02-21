@@ -82,9 +82,9 @@ public class StudentListFragment extends Fragment {
 
     private void initRecyclerView() {
         RecyclerView.ItemDecoration itemDecoration = new StudentItemDecoration();
-        recyclerView.addItemDecoration(itemDecoration);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
+        recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setHasFixedSize(true);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);

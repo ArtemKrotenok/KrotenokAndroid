@@ -24,14 +24,21 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 
 import static android.content.ContentValues.TAG;
 
-public class MapFragment extends Fragment implements OnMapReadyCallback {
+public class MapFragment extends Fragment implements OnMapReadyCallback, ViewUpdate {
     public static final int STROKE_WIDTH = 5;
     public static final int MIN_POINT_RADIUS = 30000;
     public static final int COEF_SCALE = 100000;
     public static final int MIN_COEF = 1;
     private GoogleMap mMap;
-    private boolean isReady = false;
+    private boolean isMapReady = false;
     private final CoronaVirusDataRepository coronaVirusDataRepository = CoronaVirusDataRepository.getInstance();
+
+    @Override
+    public void updateData() {
+        if (isMapReady) {
+            addCoronaVirusPoints();
+        }
+    }
 
     @Nullable
     @Override
@@ -48,22 +55,18 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         mapFragment.getMapAsync(this);
     }
 
-    public boolean isReady() {
-        return isReady;
+    public boolean isMapReady() {
+        return isMapReady;
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        isReady = true;
+        isMapReady = true;
         setMapStyle();
         if (coronaVirusDataRepository.isActual()) {
             addCoronaVirusPoints();
         }
-    }
-
-    public void updateData() {
-        addCoronaVirusPoints();
     }
 
     private void setMapStyle() {
@@ -79,10 +82,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         }
     }
 
-
     private void addCoronaVirusPoints() {
+        mMap.clear();
         for (InfectionPointEntity infectionPoint : coronaVirusDataRepository.getCoronaVirusData().getInfectionPointList()) {
-            LatLng point = new LatLng(infectionPoint.getNavLat(), infectionPoint.getNavLong());
+            LatLng point = new LatLng(infectionPoint.getLat(), infectionPoint.getLng());
             long radius = MIN_POINT_RADIUS;
             int coefficient = Math.round(infectionPoint.getConfirmed() / COEF_SCALE + MIN_COEF);
             radius = radius * coefficient;

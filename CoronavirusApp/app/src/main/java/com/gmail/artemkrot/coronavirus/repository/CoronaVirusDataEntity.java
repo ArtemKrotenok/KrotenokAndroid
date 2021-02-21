@@ -4,9 +4,9 @@ import java.util.List;
 
 public class CoronaVirusDataEntity {
     private String lastCheckTimeText;
-    private String totalConfirmed;
-    private String totalDeaths;
-    private String totalRecovered;
+    private long totalConfirmed;
+    private long totalDeaths;
+    private long totalRecovered;
     private List<InfectionPointEntity> infectionPointList;
     private List<InfectionCountry> infectionCountryList;
 
@@ -18,27 +18,27 @@ public class CoronaVirusDataEntity {
         this.lastCheckTimeText = lastCheckTimeText;
     }
 
-    public String getTotalConfirmed() {
+    public long getTotalConfirmed() {
         return totalConfirmed;
     }
 
-    public void setTotalConfirmed(String totalConfirmed) {
+    public void setTotalConfirmed(long totalConfirmed) {
         this.totalConfirmed = totalConfirmed;
     }
 
-    public String getTotalDeaths() {
+    public long getTotalDeaths() {
         return totalDeaths;
     }
 
-    public void setTotalDeaths(String totalDeaths) {
+    public void setTotalDeaths(long totalDeaths) {
         this.totalDeaths = totalDeaths;
     }
 
-    public String getTotalRecovered() {
+    public long getTotalRecovered() {
         return totalRecovered;
     }
 
-    public void setTotalRecovered(String totalRecovered) {
+    public void setTotalRecovered(long totalRecovered) {
         this.totalRecovered = totalRecovered;
     }
 

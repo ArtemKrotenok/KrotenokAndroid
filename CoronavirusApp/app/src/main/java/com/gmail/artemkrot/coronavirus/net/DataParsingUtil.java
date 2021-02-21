@@ -1,6 +1,5 @@
 package com.gmail.artemkrot.coronavirus.net;
 
-import android.icu.text.DecimalFormat;
 import android.util.Log;
 
 import com.gmail.artemkrot.coronavirus.repository.CoronaVirusDataEntity;
@@ -25,22 +24,36 @@ public class DataParsingUtil {
 
     private static final String TAG = DataParsingUtil.class.getSimpleName();
 
+    public static final String LAST_CHECK_TIME_TEXT = "lastCheckTimeText";
+    public static final String CHINA = "china";
+    public static final String TOTAL_CONFIRMED = "totalConfirmed";
+    public static final String TOTAL_CONFIRMED1 = "totalConfirmed";
+    public static final String TOTAL_DEATHS = "totalDeaths";
+    public static final String TOTAL_RECOVERED = "totalRecovered";
+    public static final String DATA = "data";
+    public static final String COUNTRY = "country";
+    public static final String LAT = "lat";
+    public static final String LONG = "long";
+    public static final String CONFIRMED = "confirmed";
+
+    public static final String FAIL_TO_PARSE_JSON_STRING = "fail to parse json string";
+
     public static CoronaVirusDataEntity getCoronaVirusDataFromJSONS(String downloadData) {
         try {
             JSONObject rootJSONObject = new JSONObject(downloadData);
             CoronaVirusDataEntity coronaVirusData = new CoronaVirusDataEntity();
-            coronaVirusData.setLastCheckTimeText(rootJSONObject.getString("lastCheckTimeText"));
-            JSONObject jsonObject = rootJSONObject.getJSONObject("china");
-            coronaVirusData.setTotalConfirmed(jsonObject.getString("totalConfirmed"));
-            coronaVirusData.setTotalConfirmed(formattedNumber(jsonObject.getLong("totalConfirmed")));
-            coronaVirusData.setTotalDeaths(formattedNumber(jsonObject.getLong("totalDeaths")));
-            coronaVirusData.setTotalRecovered(formattedNumber(jsonObject.getLong("totalRecovered")));
-            JSONArray infectionPointListJSON = jsonObject.getJSONArray("data");
+            coronaVirusData.setLastCheckTimeText(rootJSONObject.getString(LAST_CHECK_TIME_TEXT));
+            JSONObject jsonObject = rootJSONObject.getJSONObject(CHINA);
+            coronaVirusData.setTotalConfirmed(jsonObject.getLong(TOTAL_CONFIRMED));
+            coronaVirusData.setTotalConfirmed(jsonObject.getLong(TOTAL_CONFIRMED1));
+            coronaVirusData.setTotalDeaths(jsonObject.getLong(TOTAL_DEATHS));
+            coronaVirusData.setTotalRecovered(jsonObject.getLong(TOTAL_RECOVERED));
+            JSONArray infectionPointListJSON = jsonObject.getJSONArray(DATA);
             coronaVirusData.setInfectionPointList(getInfectionPointListFromJSON(infectionPointListJSON));
             coronaVirusData.setInfectionCountryList(calculateConfirmedInCountry(coronaVirusData.getInfectionPointList()));
             return coronaVirusData;
         } catch (JSONException e) {
-            Log.e(TAG, "fail to parse json string");
+            Log.e(TAG, FAIL_TO_PARSE_JSON_STRING);
         }
         return null;
     }
@@ -48,10 +61,10 @@ public class DataParsingUtil {
     public static InfectionPointEntity getInfectionPointFromJSON(JSONObject jsonObject) {
         InfectionPointEntity countryData = new InfectionPointEntity();
         try {
-            countryData.setName(jsonObject.getString("country"));
-            countryData.setNavLat(jsonObject.getDouble("lat"));
-            countryData.setNavLong(jsonObject.getDouble("long"));
-            countryData.setConfirmed(jsonObject.getLong("confirmed"));
+            countryData.setName(jsonObject.getString(COUNTRY));
+            countryData.setLat(jsonObject.getDouble(LAT));
+            countryData.setLng(jsonObject.getDouble(LONG));
+            countryData.setConfirmed(jsonObject.getLong(CONFIRMED));
         } catch (JSONException exception) {
             Log.e(TAG, exception.getMessage());
         }
@@ -68,7 +81,7 @@ public class DataParsingUtil {
             }
             return infectionPointEntityList;
         } catch (JSONException e) {
-            Log.e(TAG, "fail to parse json string");
+            Log.e(TAG, FAIL_TO_PARSE_JSON_STRING);
         }
         return null;
     }
@@ -108,7 +121,7 @@ public class DataParsingUtil {
         for (Map.Entry entry : infectionCountryMap.entrySet()) {
             InfectionCountry infectionCountry = new InfectionCountry();
             infectionCountry.setName(entry.getKey().toString());
-            infectionCountry.setConfirmed(formattedNumber((Long) entry.getValue()));
+            infectionCountry.setConfirmed((Long) entry.getValue());
             infectionCountryList.add(infectionCountry);
         }
         return infectionCountryList;
@@ -118,15 +131,11 @@ public class DataParsingUtil {
         infectionCountryList.sort(new Comparator<InfectionCountry>() {
             @Override
             public int compare(InfectionCountry infectionCountry1, InfectionCountry infectionCountry2) {
-                String confirmed1 = infectionCountry1.getConfirmed().replaceAll("\\D", "");
-                String confirmed2 = infectionCountry2.getConfirmed().replaceAll("\\D", "");
-                return Long.valueOf(confirmed2).compareTo(Long.valueOf(confirmed1));
+                long confirmed1 = infectionCountry1.getConfirmed();
+                long confirmed2 = infectionCountry2.getConfirmed();
+                return Long.compare(confirmed2, confirmed1);
             }
         });
         return infectionCountryList;
-    }
-
-    private static String formattedNumber(Long number) {
-        return new DecimalFormat("###,###").format(number);
     }
 }

@@ -2,10 +2,12 @@ package com.gmail.artemkrot.coronavirus.net;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import com.gmail.artemkrot.coronavirus.repository.CoronaVirusDataEntity;
 import com.gmail.artemkrot.coronavirus.repository.CoronaVirusDataRepository;
 
+import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -18,6 +20,7 @@ public class DataLoader implements Callback {
     private CoronaVirusDataEntity coronaVirusData = new CoronaVirusDataEntity();
     private final DataLoadListener dataLoadListener;
     private Runnable load;
+    private static final String TAG = DataLoader.class.getSimpleName();
 
     public DataLoader(DataLoadListener dataLoadListener) {
         this.dataLoadListener = dataLoadListener;
@@ -55,15 +58,21 @@ public class DataLoader implements Callback {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                URL url = null;
+                HttpURLConnection con = null;
                 try {
-                    URL url = new URL(URL_DATA_REQUEST_ADDRESS);
-                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                    url = new URL(URL_DATA_REQUEST_ADDRESS);
+                    con = (HttpURLConnection) url.openConnection();
                     con.setRequestProperty("Content-Type", "application/json");
                     con.setRequestProperty(URL_DATA_REQUEST_HEADER_NAME_KEY, URL_DATA_REQUEST_HEADER_KEY_VALUE);
                     String readStream = DataParsingUtil.readStream(con.getInputStream());
                     callback.onResult(readStream);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } catch (IOException exception) {
+                    Log.e(TAG, "fail download data");
+                } finally {
+                    if (con != null) {
+                        con.disconnect();
+                    }
                 }
             }
         }).start();

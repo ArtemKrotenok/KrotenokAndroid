@@ -3,8 +3,8 @@ package com.gmail.artemkrot.coronavirus.repository;
 public class InfectionPointEntity {
 
     private String name;
-    private double navLat;
-    private double navLong;
+    private double lat;
+    private double lng;
     private long confirmed;
 
     public String getName() {
@@ -15,20 +15,20 @@ public class InfectionPointEntity {
         this.name = name;
     }
 
-    public double getNavLat() {
-        return navLat;
+    public double getLat() {
+        return lat;
     }
 
-    public void setNavLat(double navLat) {
-        this.navLat = navLat;
+    public void setLat(double lat) {
+        this.lat = lat;
     }
 
-    public double getNavLong() {
-        return navLong;
+    public double getLng() {
+        return lng;
     }
 
-    public void setNavLong(double navLong) {
-        this.navLong = navLong;
+    public void setLng(double lng) {
+        this.lng = lng;
     }
 
     public long getConfirmed() {

@@ -34,7 +34,7 @@ public class CountriesItemAdapter extends RecyclerView.Adapter<CountriesItemAdap
     @Override
     public void onBindViewHolder(@NonNull NewsListHolder holder, int position) {
         final InfectionCountry infectionCountry = infectionCountryList.get(position);
-        holder.confirmedText.setText(String.valueOf(infectionCountry.getConfirmed()));
+        holder.confirmedText.setText(TextFormatUtil.formattedNumber(infectionCountry.getConfirmed()));
         holder.nameCountryText.setText(infectionCountry.getName());
     }
 
