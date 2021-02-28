@@ -16,28 +16,17 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends FragmentActivity implements DataLoadListener {
 
     private BottomNavigationView bottomNavigationView;
-    private InfoFragment infoFragment;
-    private MapFragment mapFragment;
     private DataLoader dataLoader;
-
-    private ViewUpdate infoPage;
-    private ViewUpdate mapPage;
+    private ViewUpdate infoPage = null;
+    private ViewUpdate mapPage = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (savedInstanceState == null) {
-            initFragments();
-        }
         initVerbals();
         startInfoFragment();
         loadData();
-    }
-
-    private void initFragments() {
-        mapFragment = new MapFragment();
-        infoFragment = new InfoFragment();
     }
 
     @Override
@@ -55,13 +44,15 @@ public class MainActivity extends FragmentActivity implements DataLoadListener {
     }
 
     private void updateData() {
-        mapPage.updateData();
-        infoPage.updateData();
+        if (mapPage != null) {
+            mapPage.updateData();
+        }
+        if (infoPage != null) {
+            infoPage.updateData();
+        }
     }
 
     private void initVerbals() {
-        mapPage = mapFragment;
-        infoPage = infoFragment;
         bottomNavigationView = findViewById(R.id.bottom_navigation_view);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -83,12 +74,16 @@ public class MainActivity extends FragmentActivity implements DataLoadListener {
     }
 
     private void startInfoFragment() {
+        InfoFragment infoFragment = new InfoFragment();
+        infoPage = infoFragment;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_placeholder, infoFragment);
         fragmentTransaction.commit();
     }
 
     private void startMapFragment() {
+        MapFragment mapFragment = new MapFragment();
+        mapPage = mapFragment;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_placeholder, mapFragment);
         fragmentTransaction.commit();
