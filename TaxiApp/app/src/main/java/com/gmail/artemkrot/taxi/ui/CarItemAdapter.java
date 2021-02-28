@@ -41,7 +41,7 @@ public class CarItemAdapter extends RecyclerView.Adapter<CarItemAdapter.NewsList
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onCarClickListener.onCarSelect(carLocationEntity.getCoordinate());
+                onCarClickListener.onCarSelect(carLocationEntity);
             }
         });
     }

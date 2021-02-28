@@ -59,9 +59,9 @@ public class MainActivity extends Activity implements DataLoadListener, OnCarCli
     }
 
     @Override
-    public void onCarSelect(Point point) {
+    public void onCarSelect(CarLocationEntity carLocationEntity) {
         mapview.getMap().move(
-                new CameraPosition(point, ZOOM, 0.0f, 0.0f),
+                new CameraPosition(carLocationEntity.getCoordinate(), ZOOM, 0.0f, 0.0f),
                 new Animation(Animation.Type.SMOOTH, 0),
                 null);
     }
