@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TaxiApp</string>
+    <string name="text_message_data_was_update">Data was update</string>
+    <string name="full_cars_list">Full cars list</string>
+</resources>
