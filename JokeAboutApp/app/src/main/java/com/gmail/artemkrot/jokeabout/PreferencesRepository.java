@@ -9,7 +9,7 @@ public class PreferencesRepository {
     private static final String LAST_NAME_VALUE = "LAST_NAME_VALUE";
     private static final String TIMER_VALUE = "TIMER_VALUE";
     private static final String PREFERENCES_NAME = "PREFERENCES_NAME";
-    private static final long DEFAULT_VALUE = 1000L;
+    private static final long DEFAULT_VALUE = 0L;
 
     private final SharedPreferences sharedPreferences;
 

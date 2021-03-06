@@ -11,9 +11,9 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class JokeService {
+public class JokeRepository {
 
-    private static final String TAG = JokeService.class.getSimpleName();
+    private static final String TAG = JokeRepository.class.getSimpleName();
     private static final String URL_ADDRESS = "https://api.icndb.com/jokes/random";
     private static final String PARAM_NAME_FIRST_NAME = "firstName";
     private static final String PARAM_NAME_LAST_NAME = "lastName";
@@ -22,7 +22,7 @@ public class JokeService {
     private final JokeReadyListener jokeReadyListener;
     private String textJoke;
 
-    public JokeService(String fistName, String lastName, JokeReadyListener jokeReadyListener) {
+    public JokeRepository(String fistName, String lastName, JokeReadyListener jokeReadyListener) {
         this.fistName = fistName;
         this.lastName = lastName;
         this.jokeReadyListener = jokeReadyListener;

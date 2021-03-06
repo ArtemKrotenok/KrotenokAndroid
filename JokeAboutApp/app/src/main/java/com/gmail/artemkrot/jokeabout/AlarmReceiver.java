@@ -1,40 +1,31 @@
 package com.gmail.artemkrot.jokeabout;
 
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import androidx.work.Worker;
-import androidx.work.WorkerParameters;
 
-import static com.gmail.artemkrot.jokeabout.App.CHANNEL_ID;
-import static com.gmail.artemkrot.jokeabout.App.NOTIFY_ID;
+import static com.gmail.artemkrot.jokeabout.NotificationUtil.CHANNEL_ID;
+import static com.gmail.artemkrot.jokeabout.NotificationUtil.NOTIFY_ID;
 
-public class MyWorker extends Worker implements JokeReadyListener {
+public class AlarmReceiver extends BroadcastReceiver implements JokeReadyListener {
+    private Context context;
+    private PreferencesRepository preferencesRepository;
+    private JokeRepository jokeRepository;
 
-    private final Context context;
-    private final PreferencesRepository preferencesRepository;
-    private JokeService jokeService;
-
-    public MyWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
-        super(context, workerParams);
+    @Override
+    public void onReceive(Context context, Intent intent) {
         this.context = context;
         preferencesRepository = new PreferencesRepository(context);
-    }
-
-    @NonNull
-    @Override
-    public Result doWork() {
         startDownloadJoke();
-        return Result.success();
     }
 
     @Override
     public void onJokeReady() {
-        String textJoke = jokeService.getTextJoke();
+        String textJoke = jokeRepository.getTextJoke();
         showJoke(textJoke);
     }
 
@@ -42,8 +33,8 @@ public class MyWorker extends Worker implements JokeReadyListener {
         String fistName = preferencesRepository.getFistNameValue();
         String lastName = preferencesRepository.getLastNameValue();
         JokeReadyListener listener = this;
-        jokeService = new JokeService(fistName, lastName, listener);
-        jokeService.getJoke();
+        jokeRepository = new JokeRepository(fistName, lastName, listener);
+        jokeRepository.getJoke();
     }
 
     private void showJoke(String textJoke) {
@@ -60,6 +51,9 @@ public class MyWorker extends Worker implements JokeReadyListener {
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT);
         NotificationManagerCompat notificationManager =
                 NotificationManagerCompat.from(context);
+        if (notificationManager.getNotificationChannel(String.valueOf(NOTIFY_ID)) == null) {
+            NotificationUtil.createNotificationChannel(context);
+        }
         notificationManager.notify(NOTIFY_ID, builder.build());
     }
 }

@@ -14,6 +14,14 @@
         android:layout_marginTop="@dimen/margin_top">
 
         <RadioButton
+            android:id="@+id/radioButton0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top"
+            android:text="@string/text_off"
+            android:textSize="@dimen/edit_text_size_text" />
+
+        <RadioButton
             android:id="@+id/radioButton1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

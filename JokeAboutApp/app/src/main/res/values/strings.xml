@@ -9,4 +9,5 @@
     <string name="channel_name">jokeabout</string>
     <string name="channel_description">notification</string>
     <string name="title_notification">Сatch a joke</string>
+    <string name="text_off">OFF</string>
 </resources>

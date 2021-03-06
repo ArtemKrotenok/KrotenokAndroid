@@ -7,18 +7,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 
-import androidx.work.PeriodicWorkRequest;
-import androidx.work.WorkManager;
-
-import java.util.concurrent.TimeUnit;
-
 public class MainActivity extends Activity {
 
-    public static final long SEC_30 = 30L;
-    public static final long MIN_1 = 60L;
-    public static final long HOUR_1 = 3600L;
-    public static final long DEFAULT_TIMER = 100L;
-
+    public static final long SEC_30 = 30000L;
+    public static final long MIN_1 = 60000L;
+    public static final long HOUR_1 = 3600000L;
+    public static final long TIMER_OFF = 0L;
     private EditText editTextFistName;
     private EditText editTextLastName;
     private RadioGroup radioGroup;
@@ -49,13 +43,7 @@ public class MainActivity extends Activity {
         preferencesRepository.saveFistNameValue(editTextFistName.getText().toString());
         preferencesRepository.saveLastNameValue(editTextLastName.getText().toString());
         preferencesRepository.saveTimerValue(getTimerValueFromRadioGroup());
-        startWorkManager(getTimerValueFromRadioGroup());
-    }
-
-    private void startWorkManager(long timer) {
-        PeriodicWorkRequest myWorkRequest = new PeriodicWorkRequest.Builder(MyWorker.class, timer, TimeUnit.MINUTES)
-                .build();
-        WorkManager.getInstance().enqueue(myWorkRequest);
+        SetAlarmUtil.setAlarm(this);
     }
 
     private long getTimerValueFromRadioGroup() {
@@ -70,7 +58,7 @@ public class MainActivity extends Activity {
                 return HOUR_1;
             }
             default: {
-                return DEFAULT_TIMER;
+                return TIMER_OFF;
             }
         }
     }
