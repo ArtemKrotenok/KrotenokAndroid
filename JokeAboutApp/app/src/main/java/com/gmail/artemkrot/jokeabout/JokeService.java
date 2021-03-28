@@ -1,6 +1,12 @@
 package com.gmail.artemkrot.jokeabout;
 
+import android.app.Service;
+import android.content.Context;
+import android.content.Intent;
+import android.os.IBinder;
 import android.util.Log;
+
+import androidx.annotation.Nullable;
 
 import java.io.IOException;
 
@@ -11,32 +17,32 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class JokeRepository {
+public class JokeService extends Service {
 
-    private static final String TAG = JokeRepository.class.getSimpleName();
     private static final String URL_ADDRESS = "https://api.icndb.com/jokes/random";
     private static final String PARAM_NAME_FIRST_NAME = "firstName";
     private static final String PARAM_NAME_LAST_NAME = "lastName";
-    private final String fistName;
-    private final String lastName;
-    private final JokeReadyListener jokeReadyListener;
-    private String textJoke;
+    private static final String TAG = JokeService.class.getSimpleName();
 
-    public JokeRepository(String fistName, String lastName, JokeReadyListener jokeReadyListener) {
-        this.fistName = fistName;
-        this.lastName = lastName;
-        this.jokeReadyListener = jokeReadyListener;
+    private Context context;
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
     }
 
-    public void getJoke() {
-        startDownloadData(fistName, lastName);
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        context = this;
+        PreferencesRepository preferencesRepository = new PreferencesRepository(context);
+        String fistName = preferencesRepository.getFistNameValue();
+        String lastName = preferencesRepository.getLastNameValue();
+        downloadAndShowJoke(fistName, lastName);
+        return super.onStartCommand(intent, flags, startId);
     }
 
-    public String getTextJoke() {
-        return textJoke;
-    }
-
-    private void startDownloadData(String fistName, String lastName) {
+    private void downloadAndShowJoke(String fistName, String lastName) {
         OkHttpClient client = new OkHttpClient();
         HttpUrl.Builder urlBuilder = HttpUrl.parse(URL_ADDRESS).newBuilder();
         urlBuilder.addQueryParameter(PARAM_NAME_FIRST_NAME, fistName);
@@ -54,8 +60,8 @@ public class JokeRepository {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String responseData = response.body().string();
-                textJoke = JokeParsingUtil.getTextJokeFromData(responseData);
-                jokeReadyListener.onJokeReady();
+                String textJoke = JokeUtil.getTextJokeFromData(responseData);
+                JokeUtil.showJoke(context, textJoke);
             }
         });
     }

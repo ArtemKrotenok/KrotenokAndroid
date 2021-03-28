@@ -1,43 +1,38 @@
 package com.gmail.artemkrot.jokeabout;
 
+import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import static com.gmail.artemkrot.jokeabout.NotificationUtil.CHANNEL_ID;
 import static com.gmail.artemkrot.jokeabout.NotificationUtil.NOTIFY_ID;
 
-public class AlarmReceiver extends BroadcastReceiver implements JokeReadyListener {
-    private Context context;
-    private PreferencesRepository preferencesRepository;
-    private JokeRepository jokeRepository;
+public class JokeUtil {
 
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        this.context = context;
-        preferencesRepository = new PreferencesRepository(context);
-        startDownloadJoke();
+    public static final String TAG_VALUE = "value";
+    public static final String TAG_JOKE = "joke";
+    private static final String TAG = JokeUtil.class.getSimpleName();
+
+    public static void setAlarmForShow(Context context) {
+        PreferencesRepository preferencesRepository = new PreferencesRepository(context);
+        long timerValue = preferencesRepository.getTimerValue();
+        if (timerValue != 0L) {
+            Intent intent = new Intent(context, JokeAlarmReceiver.class);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+            AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, timerValue, pendingIntent);
+        }
     }
 
-    @Override
-    public void onJokeReady() {
-        String textJoke = jokeRepository.getTextJoke();
-        showJoke(textJoke);
-    }
-
-    private void startDownloadJoke() {
-        String fistName = preferencesRepository.getFistNameValue();
-        String lastName = preferencesRepository.getLastNameValue();
-        JokeReadyListener listener = this;
-        jokeRepository = new JokeRepository(fistName, lastName, listener);
-        jokeRepository.getJoke();
-    }
-
-    private void showJoke(String textJoke) {
+    public static void showJoke(Context context, String textJoke) {
         Intent notificationIntent = new Intent(context, MainActivity.class);
         PendingIntent contentIntent = PendingIntent.getActivity(context,
                 0, notificationIntent,
@@ -55,5 +50,16 @@ public class AlarmReceiver extends BroadcastReceiver implements JokeReadyListene
             NotificationUtil.createNotificationChannel(context);
         }
         notificationManager.notify(NOTIFY_ID, builder.build());
+    }
+
+    public static String getTextJokeFromData(String data) {
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            JSONObject jsonJoke = jsonObject.getJSONObject(TAG_VALUE);
+            return jsonJoke.getString(TAG_JOKE);
+        } catch (JSONException e) {
+            Log.e(TAG, "fail to parse json string");
+        }
+        return null;
     }
 }

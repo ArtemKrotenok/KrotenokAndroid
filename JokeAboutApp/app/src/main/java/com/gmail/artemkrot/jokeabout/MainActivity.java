@@ -9,10 +9,11 @@ import android.widget.RadioGroup;
 
 public class MainActivity extends Activity {
 
-    public static final long SEC_30 = 30000L;
+    public static final long SEC_30 = 10L;
     public static final long MIN_1 = 60000L;
     public static final long HOUR_1 = 3600000L;
     public static final long TIMER_OFF = 0L;
+
     private EditText editTextFistName;
     private EditText editTextLastName;
     private RadioGroup radioGroup;
@@ -43,7 +44,7 @@ public class MainActivity extends Activity {
         preferencesRepository.saveFistNameValue(editTextFistName.getText().toString());
         preferencesRepository.saveLastNameValue(editTextLastName.getText().toString());
         preferencesRepository.saveTimerValue(getTimerValueFromRadioGroup());
-        SetAlarmUtil.setAlarm(this);
+        JokeUtil.setAlarmForShow(this);
     }
 
     private long getTimerValueFromRadioGroup() {

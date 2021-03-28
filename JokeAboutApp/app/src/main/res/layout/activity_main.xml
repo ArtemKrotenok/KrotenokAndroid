@@ -47,7 +47,6 @@
     </RadioGroup>
 
     <EditText
-
         android:id="@+id/edit_text_fist_name"
         style="@android:style/Widget.DeviceDefault.EditText"
         android:layout_width="match_parent"

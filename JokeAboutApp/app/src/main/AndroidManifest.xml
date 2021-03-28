@@ -28,8 +28,15 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
-        <receiver
-            android:name=".AlarmReceiver"
-            android:process=":remote"/>
+        <receiver android:name=".JokeAlarmReceiver" />
+
+        <service
+            android:name=".JokeService"
+            android:enabled="true"
+            android:exported="true"
+            >
+        </service>
+
+
     </application>
 </manifest>
