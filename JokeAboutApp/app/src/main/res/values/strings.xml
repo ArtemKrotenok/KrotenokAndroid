@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">JokeAboutApp</string>
+    <string name="edit_text_hint_fist_name">Fist name</string>
+    <string name="edit_text_hint_last_name">Last name</string>
+    <string name="button_text_save">SAVE</string>
+    <string name="text_30_sec">30 sec.</string>
+    <string name="text_1_min">1 min.</string>
+    <string name="text_1_h">1 h.</string>
+    <string name="title_notification">Сatch a joke</string>
+    <string name="text_off">OFF</string>
+</resources>

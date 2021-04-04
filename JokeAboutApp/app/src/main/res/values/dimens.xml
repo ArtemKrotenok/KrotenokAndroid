@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="button_size_text">30sp</dimen>
+    <dimen name="edit_text_margin_start">30dp</dimen>
+    <dimen name="edit_text_margin_top">25dp</dimen>
+    <dimen name="edit_text_margin_end">30dp</dimen>
+    <dimen name="edit_text_margin_bottom">5dp</dimen>
+    <dimen name="edit_text_height">60dp</dimen>
+    <dimen name="padding_start">10dp</dimen>
+    <dimen name="edit_text_size_text">30sp</dimen>
+    <dimen name="text_view_item_size">30sp</dimen>
+    <dimen name="edit_text_margin_list">10dp</dimen>
+    <dimen name="dit_text_size_text_search">30sp</dimen>
+    <dimen name="margin_button_item">10dp</dimen>
+    <dimen name="margin_top_item">10dp</dimen>
+    <dimen name="padding_end">0dp</dimen>
+    <dimen name="margin_top">30dp</dimen>
+</resources>
