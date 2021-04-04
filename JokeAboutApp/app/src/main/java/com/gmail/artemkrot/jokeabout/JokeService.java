@@ -60,8 +60,9 @@ public class JokeService extends Service {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String responseData = response.body().string();
-                String textJoke = JokeUtil.getTextJokeFromData(responseData);
-                JokeUtil.showJoke(context, textJoke);
+                String messageNotification = JokeUtil.getTextJokeFromData(responseData);
+                String titleNotification = context.getString(R.string.title_notification);
+                NotificationUtil.showNotification(context, titleNotification, messageNotification);
             }
         });
     }
